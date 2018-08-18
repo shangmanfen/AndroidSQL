@@ -79,27 +79,34 @@ public class MainActivity extends Activity {
                     try{
                         Message msg = new Message();
                         String sql = "SELECT [Password] FROM [UserInfo] where UserName='" + userName.getText() + "'";
-                        String ret = DBUtil.QuerySQL(sql);
-                        ret=ret.trim();
-                        String pw=Password.getText().toString();
-                        pw=pw.trim();
-                        if(pw.equals(ret))
-                        {
-                            msg.what=1001;
-                        }
-                        else
-                        {
-                            msg.what=1002;
-                        }
-                        Bundle data = new Bundle();
-                        data.putString("result", ret);
+                        try {
+                            String ret = DBUtil.QuerySQL(sql);
+                            ret=ret.trim();
+                            String pw=Password.getText().toString();
+                            pw=pw.trim();
+                            if(pw.equals(ret))
+                            {
+                                msg.what=1001;
+                            }
+                            else
+                            {
+                                msg.what=1002;
+                            }
+                            Bundle data = new Bundle();
+                            data.putString("result", ret);
 
-                        msg.setData(data);
-                        mHandler.sendMessage(msg);
+                            msg.setData(data);
+                            mHandler.sendMessage(msg);
+                        }
+                        catch(Exception e){
+                            msg.what=1003;mHandler.sendMessage(msg);
+                            return;
+                        }
+
+
                     }
                     catch (Exception e){
                         Message msg = new Message();
-                        tvTestResult.setText(e.getMessage());
                         Bundle data = new Bundle();
                         data.putString("result", e.getMessage());
                         msg.setData(data);
@@ -120,9 +127,12 @@ public class MainActivity extends Activity {
                         startActivity(new Intent(MainActivity.this,MainWindow.class));
                         break;
 
-                    default:
+                    case 1002:
                         Toast.makeText(MainActivity.this,"密码不正确！",Toast.LENGTH_SHORT).show();
                         Password.setText("") ;
+                        break;
+                    case 1003:
+                        Toast.makeText(MainActivity.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
                         break;
                 }
             };
