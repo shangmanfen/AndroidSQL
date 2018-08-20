@@ -84,7 +84,6 @@ public class MainActivity extends Activity {
         }
         public void login(View v) {
             if(v==btnTest){
-
                 if(userName.getText().toString().equals(""))
                 {
                     Toast.makeText(MainActivity.this,"请输入用户名！",Toast.LENGTH_SHORT).show();
@@ -204,6 +203,7 @@ public class MainActivity extends Activity {
                     case 1001:
                         Toast.makeText(MainActivity.this,"登陆成功~",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MainActivity.this,MainWindow.class));
+                        MainActivity.this.finish();
                         break;
 
                     case 1002:
