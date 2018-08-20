@@ -54,7 +54,25 @@ public class DBUtil
         }
         return result;
     }
+    public static String Record(String sql)
+    {
+        String result = "";
+        try
+        {
+            Connection conn = getSQLConnection("43.243.128.36", "health", "13240670", "health");
+            Statement stmt = conn.createStatement();//
+            stmt.executeUpdate(sql);
 
+            stmt.close();
+            conn.close();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            result += "查询数据异常!";
+            //result += "查询数据异常!" + e.getMessage();
+        }
+        return result;
+    }
     public static void main(String[] args)
     {
         // QuerySQL();
