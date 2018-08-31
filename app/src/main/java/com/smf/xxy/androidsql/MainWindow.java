@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,7 +30,8 @@ public class MainWindow extends Activity {
     public static MainWindow instance3 = null;
     private SharedPreferences pref;
     TextView textView;
-    TextView RecordContent;
+    TextView  RecordContent;
+    public  static String account;
     int year;int month;int day;int hour;int minute;String month1;String day1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MainWindow extends Activity {
         textView=findViewById(R.id.textView1);
         RecordContent=findViewById(R.id.RecordText);
         pref= PreferenceManager.getDefaultSharedPreferences(this);
-        String account=pref.getString("account","");
+        account=pref.getString("account","");
         String tiexinwenhouyu="";
         Calendar calendar = Calendar.getInstance();
 //获取系统的日期
@@ -166,4 +168,9 @@ public class MainWindow extends Activity {
             }
         };
     };
+
+    public void change(View view) {
+        startActivity(new Intent(MainWindow.this,CompleteRecord1.class));
+        //MainWindow.this.finish();
+    }
 }
