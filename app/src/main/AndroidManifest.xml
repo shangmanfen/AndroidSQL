@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity"
+        <activity
+            android:name=".StartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,15 +29,20 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".MainWindow"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_main_window"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".CompleteRecord1"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_complete_record1"
             android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".CompleteRecord2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_complete_record2"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
     </application>
 

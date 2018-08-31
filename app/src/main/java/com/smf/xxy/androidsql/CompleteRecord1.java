@@ -3,6 +3,7 @@ package com.smf.xxy.androidsql;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +18,11 @@ public class CompleteRecord1 extends Activity {
     private static Button WOutTime;
     private static Button WArriveDay;
     private static Button WArriveTime;
-EditText WName;
-Button Arrival;
+    private static Button WLeaveDay;
+    private static Button WLeaveTime;
+    EditText WName;
     Button TrafficTime;
-    private TimePicker timePicker;
     private Calendar calendar1;// 用来装日期的
-    private DatePickerDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +31,19 @@ Button Arrival;
         WOutTime=findViewById(R.id.WOutTime);
         WArriveDay=findViewById(R.id.WArriveDay);
         WArriveTime=findViewById(R.id.WArriveTime);
+        WLeaveDay=findViewById(R.id.WLeaveDay);
+        WLeaveTime=findViewById(R.id.WLeaveTime);
         WName=findViewById(R.id.WName);
         WName.setText(MainWindow.account);
         //Arrival=findViewById(R.id.Arrival);
         TrafficTime =(Button) findViewById(R.id.TrafficTime);
     }
-int year,month,day,hour,minute;
-public  void chooseTime(){
+    public  void next(View v){
+        startActivity(new Intent(CompleteRecord1.this,CompleteRecord2.class));
+        CompleteRecord1.this.finish();
+    }
+    int year,month,day,hour,minute;
+    public  void chooseTime(){
     //获取日历的一个对象
     calendar1=Calendar.getInstance();
     //获取年月日时分秒信息
@@ -58,7 +64,6 @@ public  void chooseTime(){
     }, hour, minute, true);
     dialog1.show();
 }
-
     // TODO: 选择出发时间
     public  void  selectOutTime(View v){
         chooseTime();
@@ -101,6 +106,29 @@ public  void chooseTime(){
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 int Month1=month+1;
                 WArriveDay.setText(year+"/"+Month1+"/"+dayOfMonth+" ");
+            }
+        }, year, month, day);
+        dialog.show();
+    }
+    // TODO: 选择离开时间
+    public  void  WLeaveTime(View v){
+        chooseTime();
+        TimePickerDialog dialog1 = new TimePickerDialog(CompleteRecord1.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                WLeaveTime.setText(hourOfDay+":"+minute);
+            }
+        }, hour, minute, true);
+        dialog1.show();
+    }
+    // TODO: 选择离开日期
+    public  void  WLeaveDay(View v){
+        chooseTime();
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                int Month1=month+1;
+                WLeaveDay.setText(year+"/"+Month1+"/"+dayOfMonth+" ");
             }
         }, year, month, day);
         dialog.show();

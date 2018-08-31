@@ -25,8 +25,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.716" />
+        app:layout_constraintTop_toBottomOf="@+id/RecordText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/insertbut2"
@@ -125,8 +125,9 @@
 
     <EditText
         android:id="@+id/RecordText"
-        android:layout_width="301dp"
-        android:layout_height="177dp"
+        style="android:attr/textViewStyle"
+        android:layout_width="266dp"
+        android:layout_height="173dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -134,14 +135,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
+        android:hint="请输入工作记录"
+        android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.486" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
