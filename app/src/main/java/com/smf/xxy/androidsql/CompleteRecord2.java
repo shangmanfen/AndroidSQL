@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +14,14 @@ import android.widget.TextView;
 
 public class CompleteRecord2 extends Activity {
     TextView WJobContent;
+    ConstraintLayout record;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
         int ori = mConfiguration.orientation; //获取屏幕方向
         setContentView(R.layout.activity_complete_record2);
+        record=findViewById(R.id.Record2);
         if (ori == mConfiguration.ORIENTATION_LANDSCAPE) {
 //横屏
             Button last=findViewById(R.id.last);
@@ -37,6 +40,7 @@ public class CompleteRecord2 extends Activity {
             tt.setVisibility(View.VISIBLE);
             EditText ett=findViewById(R.id.recordText1);
             ett.setVisibility(View.VISIBLE);
+            record.setBackgroundResource(R.drawable.pkqheng);
         } else if (ori == mConfiguration.ORIENTATION_PORTRAIT) {
             //竖屏
             Button last2=findViewById(R.id.last2);
@@ -55,6 +59,7 @@ public class CompleteRecord2 extends Activity {
             tt.setVisibility(View.GONE);
             EditText ett=findViewById(R.id.recordText1);
             ett.setVisibility(View.GONE);
+            record.setBackgroundResource(R.drawable.pkq);
         }
         WJobContent=findViewById(R.id.WJobContent);
         //String a=CompleteRecord1.WCity;
@@ -128,6 +133,7 @@ public class CompleteRecord2 extends Activity {
             EditText ett=findViewById(R.id.recordText1);
             ett.setVisibility(View.GONE);
             et.setText(ett.getText().toString());
+            record.setBackgroundResource(R.drawable.pkq);
         }
         else if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_LANDSCAPE) {
 //横屏
@@ -148,17 +154,19 @@ public class CompleteRecord2 extends Activity {
             EditText et=findViewById(R.id.RecordText);
             et.setVisibility(View.GONE);
             ett.setText(et.getText().toString());
+            record.setBackgroundResource(R.drawable.pkqheng);
         }
     }
     public void save(View v){
         Init();
+
 }
     private void Init(){
         CompleteRecord1.TrafficTime="时:分";
-        CompleteRecord1.WCity="";
-        CompleteRecord1.WContector="";
-        CompleteRecord1.WOutKm="";
-        CompleteRecord1.WOut="";
+        CompleteRecord1.City="";
+        CompleteRecord1.Contector="0";
+        CompleteRecord1.OutKm="";
+        CompleteRecord1.Out="";
         CompleteRecord1.WArrive="";
         CompleteRecord1.WArriveKm="";
         CompleteRecord1.WPartner="";

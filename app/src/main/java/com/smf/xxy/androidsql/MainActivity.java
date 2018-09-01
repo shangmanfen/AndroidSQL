@@ -203,7 +203,7 @@ public class MainActivity extends Activity {
                 {
                     case 1001:
                         Toast.makeText(MainActivity.this,"登陆成功~",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this,MainWindow.class));
+                        startActivity(new Intent(MainActivity.this,MainChoose.class));
                         MainActivity.this.finish();
                         break;
 

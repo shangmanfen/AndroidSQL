@@ -31,7 +31,7 @@ public class MainWindow extends Activity {
     private SharedPreferences pref;
     TextView textView;
     TextView  RecordContent;
-    public  static String account;
+    String account1;
     int year;int month;int day;int hour;int minute;String month1;String day1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class MainWindow extends Activity {
         textView=findViewById(R.id.textView1);
         RecordContent=findViewById(R.id.RecordText);
         pref= PreferenceManager.getDefaultSharedPreferences(this);
-        account=pref.getString("account","");
+        account1=pref.getString("account","");
         String tiexinwenhouyu="";
         Calendar calendar = Calendar.getInstance();
 //获取系统的日期
@@ -54,27 +54,11 @@ public class MainWindow extends Activity {
         else if(hour<=18 & hour>13){ tiexinwenhouyu="下午好~"; }
         else if(hour<=23 & hour>18){ tiexinwenhouyu="晚上好~"; }
         else if(hour>23||hour<=3){ tiexinwenhouyu="夜深啦~"; }
-        textView.setText(account+","+tiexinwenhouyu);
-    }
-
-
-    private long firstTime=0;  //记录第几次点击返回
-    @Override
-    public void onBackPressed() {
-        if (System.currentTimeMillis()-firstTime>2000){
-            Toast.makeText(MainWindow.this,"再次点击返回退出",Toast.LENGTH_SHORT).show();
-            firstTime=System.currentTimeMillis();
-        }else{
-            MainWindow.this.finish();
-            StartActivity.instance.finish();
-            MainActivity.instance2.finish();
-            AppConnect.getInstance(this).close();
-            System.exit(0);
-        }
+        textView.setText(account1+","+tiexinwenhouyu);
     }
 
     public void BackWay(View view) {
-        startActivity(new Intent(MainWindow.this,MainActivity.class));
+        //startActivity(new Intent(MainWindow.this,MainChoose.class));
         MainWindow.this.finish();
     }
     public void Insert(View view) {
