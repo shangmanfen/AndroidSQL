@@ -10,17 +10,18 @@
 
     <EditText
         android:id="@+id/recordText1"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:hint="请输入工作内容"
+        android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/WUncompleted"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -33,15 +34,15 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="工作内容："
+        android:layout_marginTop="16dp"
+        android:text="未完事宜："
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/RecordText"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -74,6 +75,7 @@
         android:layout_marginTop="8dp"
         android:layout_width="150dp"
         android:text="保存工作记录"
+        android:onClick="save"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +86,7 @@
 
     <EditText
         android:id="@+id/WRemark"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -93,6 +95,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="请输入备注计划"
+        android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -122,7 +125,7 @@
 
     <EditText
         android:id="@+id/WUncompleted"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -131,6 +134,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="请输入未完事宜"
+        android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -140,7 +144,7 @@
 
     <EditText
         android:id="@+id/WRRemark"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -149,6 +153,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="请输入油费备注"
+        android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -206,7 +211,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:text="未完事宜："
+        android:text="工作内容："
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -238,7 +243,7 @@
 
     <EditText
         android:id="@+id/RecordText"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -247,6 +252,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="请输入工作内容"
+        android:inputType="text|textMultiLine|textImeMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -284,6 +290,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="保存工作记录"
+        android:onClick="save"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -78,22 +78,29 @@ public class MainWindow extends Activity {
         MainWindow.this.finish();
     }
     public void Insert(View view) {
-        //获取系统的日期
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH)+1;
-        if(month<10){month1="0"+month;}
-        else month1 = ""+ month +"";
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        if(day<10){day1="0"+day;}
-        else day1 = ""+ day +"";
-        minute = calendar.get(Calendar.MINUTE);
-        int second = calendar.get(Calendar.SECOND);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        String date=year+"-"+month1+"-"+day1;
-        String date1=year+month1+day1;
-        String time=" "+hour+":"+minute+":"+second;
-        test(date,time,date1);
+        if (RecordContent.getText().toString().trim().equals("")){
+            Toast.makeText(MainWindow.this,"工作记录不可为空！",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //获取系统的日期
+            Calendar calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH) + 1;
+            if (month < 10) {
+                month1 = "0" + month;
+            } else month1 = "" + month + "";
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+            if (day < 10) {
+                day1 = "0" + day;
+            } else day1 = "" + day + "";
+            minute = calendar.get(Calendar.MINUTE);
+            int second = calendar.get(Calendar.SECOND);
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            String date = year + "-" + month1 + "-" + day1;
+            String date1 = year + month1 + day1;
+            String time = " " + hour + ":" + minute + ":" + second;
+            test(date, time, date1);
+        }
     }
     private void test(final String date, final String time,final String date1)
     {

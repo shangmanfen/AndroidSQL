@@ -18,7 +18,6 @@ public class CompleteRecord2 extends Activity {
         super.onCreate(savedInstanceState);
         Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
         int ori = mConfiguration.orientation; //获取屏幕方向
-
         setContentView(R.layout.activity_complete_record2);
         if (ori == mConfiguration.ORIENTATION_LANDSCAPE) {
 //横屏
@@ -58,6 +57,7 @@ public class CompleteRecord2 extends Activity {
             ett.setVisibility(View.GONE);
         }
         WJobContent=findViewById(R.id.WJobContent);
+        //String a=CompleteRecord1.WCity;
     }
     public void selectIobContent(View v){
         showMultiDialog();
@@ -127,6 +127,7 @@ public class CompleteRecord2 extends Activity {
             tt.setVisibility(View.GONE);
             EditText ett=findViewById(R.id.recordText1);
             ett.setVisibility(View.GONE);
+            et.setText(ett.getText().toString());
         }
         else if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_LANDSCAPE) {
 //横屏
@@ -146,6 +147,31 @@ public class CompleteRecord2 extends Activity {
             t.setVisibility(View.GONE);
             EditText et=findViewById(R.id.RecordText);
             et.setVisibility(View.GONE);
+            ett.setText(et.getText().toString());
         }
+    }
+    public void save(View v){
+        Init();
+}
+    private void Init(){
+        CompleteRecord1.TrafficTime="时:分";
+        CompleteRecord1.WCity="";
+        CompleteRecord1.WContector="";
+        CompleteRecord1.WOutKm="";
+        CompleteRecord1.WOut="";
+        CompleteRecord1.WArrive="";
+        CompleteRecord1.WArriveKm="";
+        CompleteRecord1.WPartner="";
+        CompleteRecord1.WWorkTimeHour="";
+        CompleteRecord1.WWorkTimeMinute="";
+        CompleteRecord1.WExtraTimeHour="";
+        CompleteRecord1.WExtraTimeMinute="";
+        CompleteRecord1.WLeaveDay="选择日期";
+        CompleteRecord1.WLeaveTime="时:分";
+        CompleteRecord1.WWorkRecordNo="";
+        CompleteRecord1.WOutDay="选择日期";
+        CompleteRecord1.WOutTime="时:分";
+        CompleteRecord1.WArriveDay="选择日期";
+        CompleteRecord1.WArriveTime="时:分";
     }
 }
