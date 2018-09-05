@@ -4,6 +4,9 @@ package com.smf.xxy.androidsql;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -12,6 +15,8 @@ import android.app.Activity;
 
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -34,13 +39,16 @@ public class MainActivity extends Activity {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     String a;
-    String version="V170125";
         @Override
         protected void onCreate(Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 让手机屏幕保持直立模式
-            this.requestWindowFeature(Window.FEATURE_NO_TITLE);this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
+            if(Build.VERSION.SDK_INT >= 21) {
+                //设置状态栏透明
+                getWindow().setStatusBarColor(Color.red(android.R.color.darker_gray));
+            }
+            //this.requestWindowFeature(Window.FEATURE_NO_TITLE);this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
             setContentView(R.layout.activity_main);
             instance2=this;
@@ -49,16 +57,14 @@ public class MainActivity extends Activity {
             tvTestResult = (TextView)findViewById(R.id.tvTestResult);
             userName=findViewById(R.id.userName);
             Password=findViewById(R.id.Password);
-
             pref= PreferenceManager.getDefaultSharedPreferences(this);
             editor=pref.edit();
             String account=pref.getString("account","");
             String password=pref.getString("password","");
-            editor.putString("version",version);
-            editor.commit();
+            //editor.putString("version",version);
+            //editor.commit();
             userName.setText(account);
             Password.setText(password);
-            findVersion();
             btnClean.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -95,11 +101,10 @@ public class MainActivity extends Activity {
                 }
                 else {
                     Toast.makeText(MainActivity.this,"正在登陆,请稍后...",Toast.LENGTH_SHORT).show();
-
-                    editor.putString("account",userName.getText().toString());
-                    editor.putString("password",Password.getText().toString());
-                    editor.commit();
                     test();
+//                    Uri uri = Uri.parse("http://www.baidu.com");
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                    startActivity(intent);
                 }
             }
         }
@@ -114,7 +119,7 @@ public class MainActivity extends Activity {
                         Message msg = new Message();
                         String sql = "SELECT [Password] FROM [UserInfo] where UserName='" + userName.getText() + "'";
                         try {
-                            String ret = DBUtil.QuerySQL(sql);
+                            String ret = DBUtil.QuerySQL(sql,"Password");
                             ret=ret.trim();
                             String pw=Password.getText().toString();
                             pw=pw.trim();
@@ -151,51 +156,6 @@ public class MainActivity extends Activity {
             };
             new Thread(run).start();
         }
-    private void findVersion()
-    {
-        Runnable run = new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try{
-                    Message msg = new Message();
-                    String sql = "SELECT [Version] FROM [Version]";
-                    try {
-                        String ret = FindVersion.QuerySQL(sql);
-                        ret=ret.trim();
-                        version=pref.getString("version","");
-                        if(version.equals(ret))
-                        {
-                            msg.what=1004;
-                        }
-                        else
-                        {
-                            msg.what=1005;
-                        }
-                        Bundle data = new Bundle();
-                        data.putString("result", ret);
-
-                        msg.setData(data);
-                        mHandler.sendMessage(msg);
-                    }
-                    catch(Exception e){
-                        msg.what=1003;mHandler.sendMessage(msg);
-                        return;
-                    }
-                }
-                catch (Exception e){
-                    Message msg = new Message();
-                    Bundle data = new Bundle();
-                    data.putString("result", e.getMessage());
-                    msg.setData(data);
-                    mHandler.sendMessage(msg);
-                }
-                finally { }
-            }
-        };
-        new Thread(run).start();
-    }
 
         Handler mHandler = new Handler(){
             public void handleMessage(android.os.Message msg) {
@@ -203,6 +163,9 @@ public class MainActivity extends Activity {
                 {
                     case 1001:
                         Toast.makeText(MainActivity.this,"登陆成功~",Toast.LENGTH_SHORT).show();
+                        editor.putString("account",userName.getText().toString());
+                        editor.putString("password",Password.getText().toString());
+                        editor.commit();
                         startActivity(new Intent(MainActivity.this,MainChoose.class));
                         MainActivity.this.finish();
                         break;

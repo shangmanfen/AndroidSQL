@@ -27,7 +27,7 @@ public class DBUtil
         return con;
     }
 
-    public static String QuerySQL(String sql)
+    public static String QuerySQL(String sql,String name)
     {
         String result = "";
         try
@@ -39,7 +39,7 @@ public class DBUtil
             while (rs.next())
             {
                 //String s1 = rs.getString("UserName");
-                result = rs.getString("Password");
+                result = rs.getString(name);
                 //result += s1 + "  -  " + s2 + "\n";
                 //System.out.println(s1 + "  -  " + s2);
                 System.out.println(result);

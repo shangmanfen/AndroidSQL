@@ -46,6 +46,7 @@ public class MainChoose extends Activity {
         textView.setText(account+","+tiexinwenhouyu);
         simpleWorkRecord=findViewById(R.id.SimpleWorkRecord);
         completeWorkRecord=findViewById(R.id.completeWorkRecord);
+        ImageButton login=findViewById(R.id.Home);
         simpleWorkRecord.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -72,6 +73,19 @@ public class MainChoose extends Activity {
                 return false;
             }
         });
+        login.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //更改为按下时的背景图片
+                    v.setBackgroundResource(R.drawable.homepress);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    //改为抬起时的图片
+                    v.setBackgroundResource(R.drawable.home);
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -94,5 +108,9 @@ public class MainChoose extends Activity {
             AppConnect.getInstance(this).close();
             System.exit(0);
         }
+    }
+    public void reLogin(View v){
+        startActivity(new Intent(MainChoose.this,MainActivity.class));
+        MainChoose.this.finish();
     }
 }

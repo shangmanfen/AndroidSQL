@@ -99,7 +99,7 @@ public class MainWindow extends Activity {
                             "([Name],[RecordNo],[OutTime],[ArriveTime],[LeaveTime],[WorkTime],[ExtraTime],[TrafficTime],[City],[CShortName],[Contector],[JobContent],[Uncompleted]" +
                             ",[Remark],[ReportNo],[TypeDate],[LeaderRemark],[IsLeaderScore],[LeaderScoreDate],[Partner],[Abandoner],[AbandonDate],[Out],[OutKm],[Arrive]" +
                             ",[ArriveKm],[Actual],[RRemark],[Allowance],[Solveway]) values " +
-                            "('季杭蕾','"+ date1+"01',"+
+                            "('"+account1+"','"+ date1+"01',"+
                             "'1900-01-01','"+date+" 8:00:0',"+
                             "'"+date +time+"',"+
                             "'1900-01-01','1900-01-01','1900-01-01','宁波','','','其他','','','无'," +
@@ -137,9 +137,9 @@ public class MainWindow extends Activity {
             switch (msg.what)
             {
                 case 1001:
-                    Toast.makeText(MainWindow.this,"保存成功~",Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(MainActivity.this,MainWindow.class));
-                    //MainActivity.this.finish();
+                    //Toast.makeText(MainWindow.this,"保存成功~",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainWindow.this,success.class));
+                    MainWindow.this.finish();
                     break;
 
                 case 1002:

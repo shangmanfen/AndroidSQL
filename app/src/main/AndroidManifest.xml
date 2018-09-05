@@ -47,8 +47,16 @@
         <activity
             android:name=".MainChoose"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_main_choose"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".success"
+            android:label="@string/title_activity_success" />
+        <activity
+            android:name=".CompleteRecord3"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_complete_record3"
             android:theme="@style/FullscreenTheme"></activity>
     </application>
 

@@ -30,21 +30,19 @@ public class CompleteRecord1 extends Activity {
     EditText WWorkRecordNo1;
     EditText WCity1;
     EditText WContector1;
-    EditText WOut1;
-    EditText WArrive1;
-    EditText WOutKm1;
-    EditText WArriveKm1;
     EditText WPartner1;
-    EditText WWorkTimeHour1;
-    EditText WWorkTimeMinute1;
-    EditText WExtraTimeHour1;
-    EditText WExtraTimeMinute1;
+    Button WWorkTime1;
+    Button WExtraTime1;
     Button TrafficTime1;
     private Calendar calendar1;// 用来装日期的
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_record1);
+        pref= PreferenceManager.getDefaultSharedPreferences(this);
+        editor=pref.edit();
         WOutDay1=findViewById(R.id.WOutDay);
         WOutTime1=findViewById(R.id.WOutTime);
         WArriveDay1=findViewById(R.id.WArriveDay);
@@ -53,96 +51,71 @@ public class CompleteRecord1 extends Activity {
         WLeaveTime1=findViewById(R.id.WLeaveTime);
         WName1=findViewById(R.id.WName);
         WName1.setText(MainChoose.account);
-        WExtraTimeMinute1=findViewById(R.id.WExtraTimeMinute);
-        WExtraTimeHour1=findViewById(R.id.WExtraTimeHour);
-        WWorkTimeMinute1=findViewById(R.id.WWorkTimeMinute);
-        WWorkTimeHour1=findViewById(R.id.WWorkTimeHour);
+        WExtraTime1=findViewById(R.id.WExtraTime);
+        WWorkTime1=findViewById(R.id.WWorkTime);
         WPartner1=findViewById(R.id.WPartner);
-        WArriveKm1=findViewById(R.id.WArriveKm);
-        WOutKm1=findViewById(R.id.WOutKm);
-        WArrive1=findViewById(R.id.WArrive);
-        WOut1=findViewById(R.id.WOut);
         WContector1=findViewById(R.id.WContector);
         WCity1=findViewById(R.id.WCity);
         WWorkRecordNo1=findViewById(R.id.WWorkRecordNo);
-        TrafficTime1 =findViewById(R.id.TrafficTime);
+        TrafficTime1 =findViewById(R.id.trafficTime);
         fuzhi();
     }
+    public static boolean IsOut=false;
     public  void protect(View v){
-        try{
-            if(Integer.parseInt(WWorkTimeHour1.getText().toString().trim())>23||Integer.parseInt(WWorkTimeHour1.getText().toString().trim())<0)
-                Toast.makeText(CompleteRecord1.this,"工作时间--小时有误！",Toast.LENGTH_SHORT).show();
-            else if(Integer.parseInt(WWorkTimeMinute1.getText().toString().trim())>59||Integer.parseInt(WWorkTimeMinute1.getText().toString().trim())<0)
-                Toast.makeText(CompleteRecord1.this,"工作时间--分钟有误！",Toast.LENGTH_SHORT).show();
-            else if(Integer.parseInt(WExtraTimeHour1.getText().toString().trim())>23||Integer.parseInt(WExtraTimeHour1.getText().toString().trim())<0)
-                Toast.makeText(CompleteRecord1.this,"加班时间--小时有误！",Toast.LENGTH_SHORT).show();
-            else if(Integer.parseInt(WExtraTimeMinute1.getText().toString().trim())>59||Integer.parseInt(WExtraTimeMinute1.getText().toString().trim())<0)
-                Toast.makeText(CompleteRecord1.this,"加班时间--分钟有误！",Toast.LENGTH_SHORT).show();
-        }catch (Exception e){}
-        if(WName1.getText().toString().trim().equals("")){
+        if(WOutTime1.getText().toString().trim().equals("时:分"))
+            IsOut=false;
+        else IsOut=true;
+        if(WName1.getText().toString().trim().equals(""))
             Toast.makeText(CompleteRecord1.this,"用户名不得为空！",Toast.LENGTH_SHORT).show();
-        }
-        else if(WWorkRecordNo1.getText().toString().trim().equals("")){
+        else if(WWorkRecordNo1.getText().toString().trim().equals(""))
             Toast.makeText(CompleteRecord1.this,"记录编号不得为空！",Toast.LENGTH_SHORT).show();
-        }
         else if(WArriveDay1.getText().toString().trim().equals("选择日期")||WArriveTime1.getText().toString().trim().equals("时:分"))
             Toast.makeText(CompleteRecord1.this,"到达日期为必填项！",Toast.LENGTH_SHORT).show();
         else if(WCity1.getText().toString().trim().equals(""))
             Toast.makeText(CompleteRecord1.this,"城市不能为空！",Toast.LENGTH_SHORT).show();
-        else
-            if(!(WOut1.getText().toString().trim().equals(""))){
-                if(WOutKm1.getText().toString().trim().equals("")){
-                    Toast.makeText(CompleteRecord1.this,"请补齐出发公里数！",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if(WArrive1.getText().toString().trim().equals("")) {
-                    Toast.makeText(CompleteRecord1.this, "请补齐到达地点！", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if(WArriveKm1.getText().toString().trim().equals("")){
-                Toast.makeText(CompleteRecord1.this,"请补齐到达公里数！",Toast.LENGTH_SHORT).show();
-                    return;}
-                else if(WOutTime1.getText().toString().trim().equals("时:分")){
-                Toast.makeText(CompleteRecord1.this,"请补齐出发时间！",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-            next();
-    }
-    public static String OutTime,ArriveTime,LeaveTime,WorkTime,ExtraTime;
-    private  void next(){
-            OutTime=WOutDay1.getText().toString()+" " +WOutTime1.getText().toString() + ":0";
+        else {
             if(WOutDay1.getText().toString().trim().equals("选择日期")||WOutTime1.getText().toString().trim().equals("时:分"))
                 OutTime = "1900-1-1 0:0:0";
-            ArriveTime = WArriveDay1.getText().toString() + " " + WArriveTime1.getText().toString()+ ":0";
-            LeaveTime = WLeaveDay1.getText().toString()+ " " + WLeaveTime1.getText().toString()+ ":0";
+            else
+                OutTime=WOutDay1.getText().toString().trim()+" " +WOutTime1.getText().toString() + ":0";
+            ArriveTime = WArriveDay1.getText().toString().trim() + " " + WArriveTime1.getText().toString()+ ":0";
             if(WLeaveDay1.getText().toString().trim().equals("选择日期")||WLeaveTime1.getText().toString().trim().equals("时:分"))
                 LeaveTime = "1900-1-1 0:0:0";
+            else
+                LeaveTime = WLeaveDay1.getText().toString().trim()+ " " + WLeaveTime1.getText().toString()+ ":0";
             try{
-                if(stringToDate(OutTime).getTime()>stringToDate(ArriveTime).getTime()){
+                if(stringToDate(OutTime).getTime()!=stringToDate("1900-1-1 0:0:0").getTime() & stringToDate(LeaveTime).getTime()!=stringToDate("1900-1-1 0:0:0").getTime()){
+                    if(stringToDate(OutTime).getTime()>stringToDate(ArriveTime).getTime()){
                     Toast.makeText(CompleteRecord1.this,"出发时间不能晚于到达时间!",Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(stringToDate(LeaveTime).getTime()<stringToDate(ArriveTime).getTime()){
+                    }
+                    else if(stringToDate(LeaveTime).getTime()<stringToDate(ArriveTime).getTime()){
                     Toast.makeText(CompleteRecord1.this,"离开时间不能早于到达时间!",Toast.LENGTH_SHORT).show();
                     return;
+                    }
                 }
             }catch (Exception e){}
-            if (WWorkTimeHour1.getText().toString().trim().equals("")|| WWorkTimeMinute1.getText().toString().trim().equals(""))
+            next();
+        }
+    }
+    private static String OutTime,ArriveTime,LeaveTime;
+    private static  String WorkTime="时:分";
+    private static  String ExtraTime="时:分";
+    private  void next(){
+            if (WWorkTime1.getText().toString().trim().equals("时:分")||WWorkTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
                 WorkTime = "1900-1-1 0:0:0";
             else
-                WorkTime = WWorkTimeHour+ ":" + WWorkTimeMinute+ ":0";
-            if (WExtraTimeHour1.getText().toString().trim().equals("")|| WExtraTimeMinute1.getText().toString().trim().equals(""))
+                WorkTime =WWorkTime1.getText().toString()+ ":0";
+            if (WExtraTime1.getText().toString().trim().equals("时:分")||WExtraTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
                 ExtraTime = "1900-1-1 0:0:0";
             else
-                ExtraTime = WExtraTimeHour1.getText().toString()+ ":" + WExtraTimeMinute1.getText().toString()+ ":0";
-            if(TrafficTime1.getText().toString().trim().equals("时:分"))
+                ExtraTime = WExtraTime1.getText().toString()+ ":0";
+            if(TrafficTime1.getText().toString().trim().equals("时:分")||TrafficTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
                 TrafficTime = "1900-1-1 0:0:0";
             else
-                TrafficTime = TrafficTime+ ":0";
-
+                TrafficTime = TrafficTime1.getText().toString().trim()+ ":0";
             chuanzhi();
-            startActivity(new Intent(CompleteRecord1.this,CompleteRecord2.class));
+            startActivity(new Intent(CompleteRecord1.this,CompleteRecord3.class));
             CompleteRecord1.this.finish();
     }
     // strTime要转换的string类型的时间，formatType要转换的格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日
@@ -176,6 +149,28 @@ public class CompleteRecord1 extends Activity {
     }, hour, minute, true);
     dialog1.show();
 }
+    // TODO: 选择正常工作时间
+    public  void getWWorkTime(View v){
+        chooseTime();
+        TimePickerDialog dialog1 = new TimePickerDialog(CompleteRecord1.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                WWorkTime1.setText(hourOfDay+":"+minute);
+            }
+        }, hour, minute, true);
+        dialog1.show();
+    }
+    // TODO: 选择加班工作时间
+    public  void getWExtraTime(View v){
+        chooseTime();
+        TimePickerDialog dialog1 = new TimePickerDialog(CompleteRecord1.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                WExtraTime1.setText(hourOfDay+":"+minute);
+            }
+        }, hour, minute, true);
+        dialog1.show();
+    }
     // TODO: 选择出发时间
     public  void  selectOutTime(View v){
         chooseTime();
@@ -290,28 +285,19 @@ public class CompleteRecord1 extends Activity {
         }, year, month, day);
         dialog.show();
     }
-    public static String WOutDay="选择日期";
-    public static String WOutTime="时:分";
-    public static String WArriveDay="选择日期";
-    public static String WArriveTime="时:分";
-    public static String WLeaveDay="选择日期";
-    public static String WLeaveTime="时:分";
-    public static String TrafficTime="时:分";
-    public static String Contector="0";
-    public static String City,Out,WArrive,OutKm,WName,WWorkRecordNo;
-    public static String WArriveKm,WPartner,WWorkTimeHour,WWorkTimeMinute,WExtraTimeHour,WExtraTimeMinute;
+    private static String WOutDay="选择日期";
+    private static String WOutTime="时:分";
+    private static String WArriveDay="选择日期";
+    private static String WArriveTime="时:分";
+    private static String WLeaveDay="选择日期";
+    private static String WLeaveTime="时:分";
+    private static String TrafficTime="时:分";
+    private static String Contector="0";
+    private static String City,WName,WWorkRecordNo,WPartner;
     private void chuanzhi(){
         City=WCity1.getText().toString().trim();
         Contector=WContector1.getText().toString().trim();//差旅补贴
-        OutKm=WOutKm1.getText().toString().trim();//出发公里数
-        Out=WOut1.getText().toString().trim();//出发地点
-        WArrive=WArrive1.getText().toString().trim();//到达地点
-        WArriveKm=WArriveKm1.getText().toString().trim();//到达公里数
         WPartner=WPartner1.getText().toString().trim();//同去人员
-        WWorkTimeHour=WWorkTimeHour1.getText().toString().trim();//正常交通时间，小时
-        WWorkTimeMinute=WWorkTimeMinute1.getText().toString().trim();//正常交通时间，分钟
-        WExtraTimeHour=WExtraTimeHour1.getText().toString().trim();//加班工作时间，小时
-        WExtraTimeMinute=WExtraTimeMinute1.getText().toString().trim();//加班工作时间，分钟
         WLeaveDay=WLeaveDay1.getText().toString().trim();//离开日期
         WLeaveTime=WLeaveTime1.getText().toString().trim();//离开时间
         WName=WName1.getText().toString().trim();
@@ -320,20 +306,50 @@ public class CompleteRecord1 extends Activity {
         WOutTime=WOutTime1.getText().toString().trim();//出发时间
         WArriveDay=WArriveDay1.getText().toString().trim();//到达日期
         WArriveTime=WArriveTime1.getText().toString().trim();//到达时间
+        editor.putString("WorkTime",WorkTime);
+        editor.putString("ExtraTime",ExtraTime);
+        editor.putString("TrafficTime",TrafficTime);
+        editor.putString("OutTime",OutTime);
+        editor.putString("ArriveTime",ArriveTime);
+        editor.putString("LeaveTime",LeaveTime);
+        editor.putString("City",City);
+        editor.putString("Contector",Contector);
+        editor.putString("WPartner",WPartner);
+        editor.putString("WLeaveDay",WLeaveDay);
+        editor.putString("WLeaveTime",WLeaveTime);
+        editor.putString("WWorkRecordNo",WWorkRecordNo);
+        editor.putString("WOutDay",WOutDay);
+        editor.putString("WOutTime",WOutTime);
+        editor.putString("WArriveDay",WArriveDay);
+        editor.putString("WArriveTime",WArriveTime);
+        editor.commit();
     }
     private void fuzhi(){
+        if(pref.getString("WorkTime","时:分").equals("时:分")){WorkTime=pref.getString("WorkTime","时:分");}
+        else
+        WorkTime=pref.getString("WorkTime","时:分").substring(0,pref.getString("WorkTime","时:分").length()-2);
+        if(pref.getString("ExtraTime","时:分").equals("时:分")){ExtraTime=pref.getString("ExtraTime","时:分");}
+        else
+            ExtraTime=pref.getString("ExtraTime","时:分").substring(0,pref.getString("ExtraTime","时:分:0").length()-2);
+        if(pref.getString("TrafficTime","时:分").equals("时:分")){TrafficTime=pref.getString("TrafficTime","时:分");}
+        else
+            TrafficTime=pref.getString("TrafficTime","时:分").substring(0,pref.getString("TrafficTime","时:分:0").length()-2);
+        City=pref.getString("City","");
+        Contector=pref.getString("Contector","0");
+        WPartner=pref.getString("WPartner","");
+        WLeaveDay=pref.getString("WLeaveDay","年/月/日");
+        WLeaveTime=pref.getString("WLeaveTime","时:分");
+        WWorkRecordNo=pref.getString("WWorkRecordNo","");
+        WOutDay=pref.getString("WOutDay","年/月/日");
+        WOutTime=pref.getString("WOutTime","时:分");
+        WArriveDay=pref.getString("WArriveDay","年/月/日");
+        WArriveTime=pref.getString("WArriveTime","时:分");
+        WWorkTime1.setText(WorkTime);
+        WExtraTime1.setText(ExtraTime);
         TrafficTime1.setText(TrafficTime);
         WCity1.setText(City);
         WContector1.setText(Contector);
-        WOutKm1.setText(OutKm);
-        WOut1.setText(Out);
-        WArrive1.setText(WArrive);
-        WArriveKm1.setText(WArriveKm);
         WPartner1.setText(WPartner);
-        WWorkTimeHour1.setText(WWorkTimeHour);
-        WWorkTimeMinute1.setText(WWorkTimeMinute);
-        WExtraTimeHour1.setText(WExtraTimeHour);
-        WExtraTimeMinute1.setText(WExtraTimeMinute);
         WLeaveDay1.setText(WLeaveDay);
         WLeaveTime1.setText(WLeaveTime);
         WWorkRecordNo1.setText(WWorkRecordNo);
