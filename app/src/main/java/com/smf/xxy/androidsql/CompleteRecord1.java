@@ -1,16 +1,21 @@
 package com.smf.xxy.androidsql;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -18,6 +23,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import cn.waps.AppConnect;
 
 public class CompleteRecord1 extends Activity {
     Button WOutDay1;
@@ -37,6 +44,23 @@ public class CompleteRecord1 extends Activity {
     private Calendar calendar1;// 用来装日期的
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    //自定义变量
+    private EditText titleEdit;
+    private EditText dateEdit;
+    private EditText timeEdit;
+    private EditText contentEdit;
+    //底部四个布局按钮
+    private LinearLayout layoutDate;
+    private LinearLayout layoutTime;
+    private LinearLayout layoutCancel;
+    private LinearLayout layoutSave;
+    //定义显示时间控件
+    private Calendar calendar; //通过Calendar获取系统时间
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private int mHour;
+    private int mMinute;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +82,26 @@ public class CompleteRecord1 extends Activity {
         WCity1=findViewById(R.id.WCity);
         WWorkRecordNo1=findViewById(R.id.WWorkRecordNo);
         TrafficTime1 =findViewById(R.id.trafficTime);
+        chooseTime();
+        if(month<9){
+            if(day<10)
+                WWorkRecordNo = ""+year+"0"+(month+1)+"0"+day+"01";
+            else
+                WWorkRecordNo = ""+year+"0"+(month+1)+day+"01";
+        }
+        else{
+            if(day<10)
+                WWorkRecordNo = ""+year+(month+1)+"0"+day+"01";
+            else
+                WWorkRecordNo = ""+year+(month+1)+day+"01";
+        }
+        WWorkRecordNo1.setText(WWorkRecordNo);
         fuzhi();
+    }
+    @Override
+    public void onBackPressed() {
+            CompleteRecord1.this.finish();
+        MainChoose.introduce.setClickable(true);MainChoose.describe.setClickable(true);
     }
     public static boolean IsOut=false;
     public  void protect(View v){
@@ -117,6 +160,7 @@ public class CompleteRecord1 extends Activity {
             chuanzhi();
             startActivity(new Intent(CompleteRecord1.this,CompleteRecord3.class));
             CompleteRecord1.this.finish();
+        MainChoose.introduce.setClickable(true);MainChoose.describe.setClickable(true);
     }
     // strTime要转换的string类型的时间，formatType要转换的格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日
     // HH时mm分ss秒，
@@ -140,14 +184,20 @@ public class CompleteRecord1 extends Activity {
 }
     // TODO: 选择交通时间
     public  void getTrafficTime(View v){
-    chooseTime();
-    TimePickerDialog dialog1 = new TimePickerDialog(CompleteRecord1.this, new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            TrafficTime1.setText(hourOfDay+":"+minute);
-        }
-    }, hour, minute, true);
-    dialog1.show();
+        chooseTime();
+        TimePickerDialog dialog1 = new TimePickerDialog(CompleteRecord1.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                TrafficTime1.setText(hourOfDay+":"+minute);
+            }
+        }, hour, minute, true);
+        dialog1.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                TrafficTime1.setText("时:分");
+            }
+        });
+        dialog1.show();
 }
     // TODO: 选择正常工作时间
     public  void getWWorkTime(View v){
@@ -158,6 +208,12 @@ public class CompleteRecord1 extends Activity {
                 WWorkTime1.setText(hourOfDay+":"+minute);
             }
         }, hour, minute, true);
+        dialog1.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WWorkTime1.setText("时:分");
+            }
+        });
         dialog1.show();
     }
     // TODO: 选择加班工作时间
@@ -169,6 +225,12 @@ public class CompleteRecord1 extends Activity {
                 WExtraTime1.setText(hourOfDay+":"+minute);
             }
         }, hour, minute, true);
+        dialog1.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WExtraTime1.setText("时:分");
+            }
+        });
         dialog1.show();
     }
     // TODO: 选择出发时间
@@ -180,6 +242,12 @@ public class CompleteRecord1 extends Activity {
                 WOutTime1.setText(hourOfDay+":"+minute);
             }
         }, hour, minute, true);
+        dialog1.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WOutTime1.setText("时:分");
+            }
+        });
         dialog1.show();
     }
     // TODO: 选择出发日期
@@ -207,6 +275,12 @@ public class CompleteRecord1 extends Activity {
                     Toast.makeText(CompleteRecord1.this,"年份不得大于今日！",Toast.LENGTH_SHORT).show();
             }
         }, year, month, day);
+        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WOutDay1.setText("年/月/日");
+            }
+        });
         dialog.show();
     }
     // TODO: 选择到达时间
@@ -218,6 +292,12 @@ public class CompleteRecord1 extends Activity {
                 WArriveTime1.setText(hourOfDay+":"+minute);
             }
         }, hour, minute, true);
+        dialog1.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WArriveTime1.setText("时:分");
+            }
+        });
         dialog1.show();
     }
     // TODO: 选择到达日期
@@ -245,6 +325,12 @@ public class CompleteRecord1 extends Activity {
                     Toast.makeText(CompleteRecord1.this,"年份不得大于今日！",Toast.LENGTH_SHORT).show();
             }
         }, year, month, day);
+        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WArriveDay1.setText("年/月/日");
+            }
+        });
         dialog.show();
     }
     // TODO: 选择离开时间
@@ -256,6 +342,12 @@ public class CompleteRecord1 extends Activity {
                 WLeaveTime1.setText(hourOfDay+":"+minute);
             }
         }, hour, minute, true);
+        dialog1.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WLeaveTime1.setText("时:分");
+            }
+        });
         dialog1.show();
     }
     // TODO: 选择离开日期
@@ -283,6 +375,12 @@ public class CompleteRecord1 extends Activity {
                     Toast.makeText(CompleteRecord1.this,"年份不得大于今日！",Toast.LENGTH_SHORT).show();
             }
         }, year, month, day);
+        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "清空", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WLeaveDay1.setText("年/月/日");
+            }
+        });
         dialog.show();
     }
     private static String WOutDay="选择日期";
@@ -358,9 +456,4 @@ public class CompleteRecord1 extends Activity {
         WArriveDay1.setText(WArriveDay);
         WArriveTime1.setText(WArriveTime);
     }
-/*    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(CompleteRecord1.this,MainChoose.class));
-        CompleteRecord1.this.finish();
-    }*/
 }

@@ -27,7 +27,7 @@ import cn.waps.AppListener;
 public class StartActivity extends Activity {
     public static StartActivity instance=null;
     private SharedPreferences pref;
-    String version="V180905";
+    String version="V18090501";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class StartActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
         setContentView(R.layout.activity_start);
         pref= PreferenceManager.getDefaultSharedPreferences(this);
-        AppConnect.getInstance("53d4be2fd81e6be3da6e149067d4a17a","53d4be2fd81e6be3da6e149067d4a17a",this);
+        AppConnect.getInstance(this);
 
         LinearLayout adlayout =(LinearLayout)findViewById(R.id.AdLinearLayout);
         AppConnect.getInstance(this).showBannerAd(this, adlayout);
@@ -101,10 +101,13 @@ public class StartActivity extends Activity {
                     TimerTask timerTask=new TimerTask() {
                         @Override
                         public void run() {
-                            if(!account.equals("") & !password.equals(""))
+                            if(!account.equals("") & !password.equals("")){
                                 startActivity(new Intent(StartActivity.this,MainChoose.class));
-                            else
-                                startActivity(new Intent(StartActivity.this,MainActivity.class));
+                                StartActivity.this.finish();}
+                            else {
+                                startActivity(new Intent(StartActivity.this, MainActivity.class));
+                                StartActivity.this.finish();
+                            }
                         }
                     };timer.schedule(timerTask,2000);
                     break;

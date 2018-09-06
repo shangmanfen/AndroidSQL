@@ -83,8 +83,6 @@ public class MainActivity extends Activity {
                 firstTime=System.currentTimeMillis();
             }else{
                 MainActivity.this.finish();
-                StartActivity.instance.finish();
-                MainWindow.instance3.finish();
                 AppConnect.getInstance(this).close();
                 System.exit(0);
             }
@@ -102,9 +100,6 @@ public class MainActivity extends Activity {
                 else {
                     Toast.makeText(MainActivity.this,"正在登陆,请稍后...",Toast.LENGTH_SHORT).show();
                     test();
-//                    Uri uri = Uri.parse("http://www.baidu.com");
-//                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                    startActivity(intent);
                 }
             }
         }

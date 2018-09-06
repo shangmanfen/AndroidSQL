@@ -1,5 +1,7 @@
 package com.smf.xxy.androidsql;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -58,7 +60,8 @@ public class MainWindow extends Activity {
     }
 
     public void BackWay(View view) {
-        //startActivity(new Intent(MainWindow.this,MainChoose.class));
+        MainChoose.describe.setClickable(true);
+        MainChoose.introduce.setClickable(true);
         MainWindow.this.finish();
     }
     public void Insert(View view) {
@@ -162,6 +165,6 @@ public class MainWindow extends Activity {
 
     public void change(View view) {
         startActivity(new Intent(MainWindow.this,CompleteRecord1.class));
-        //MainWindow.this.finish();
+        MainWindow.this.finish();
     }
 }

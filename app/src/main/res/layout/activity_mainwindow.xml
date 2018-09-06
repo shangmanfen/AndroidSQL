@@ -127,7 +127,7 @@
         android:ems="10"
         android:hint="请输入工作记录"
         android:inputType="text|textMultiLine"
-        android:textColor="@android:color/background_light"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

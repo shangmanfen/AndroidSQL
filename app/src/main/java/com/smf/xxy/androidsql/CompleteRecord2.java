@@ -108,7 +108,7 @@ public class CompleteRecord2 extends Activity {
     private void showMultiDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CompleteRecord2.this);
         builder.setTitle("工作类型：");
-        final String[] hobbies = {"会议", "培训", "交通", "其它","休假"};
+        final String[] hobbies = {"其它","会议", "培训", "交通","休假"};
         /**
          * 第一个参数指定我们要显示的一组下拉多选框的数据集合
          * 第二个参数代表哪几个选项被选择，如果是null，则表示一个都不选择，如果希望指定哪一个多选选项框被选择，
@@ -128,19 +128,20 @@ public class CompleteRecord2 extends Activity {
                 }
             }
         });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+
+            }
+        });
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
                 WJobContent.setText(sb.toString());
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
             }
         });
         builder.show();
