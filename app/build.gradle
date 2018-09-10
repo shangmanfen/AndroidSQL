@@ -6,8 +6,8 @@ android {
         applicationId "com.smf.xxy.androidsql"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 2
-        versionName "V18090501"
+        versionCode 4
+        versionName "V180909"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -31,4 +31,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation files('libs/AppOffer_3.0.3.jar')
     implementation 'com.android.support:design:28.0.0-rc01'
+    implementation files('libs/alipaySdk-20180601.jar')
 }

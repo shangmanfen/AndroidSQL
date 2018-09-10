@@ -32,9 +32,19 @@ public class CompleteRecord3 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
         setContentView(R.layout.activity_complete_record3);
         record=findViewById(R.id.lalala);
+        int ori = mConfiguration.orientation; //获取屏幕方向
+        if (ori == mConfiguration.ORIENTATION_LANDSCAPE) {//横屏
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
+            record.setBackgroundResource(R.drawable.hyheng);
+        } else if (ori == mConfiguration.ORIENTATION_PORTRAIT) {
+            //竖屏
+            record.setBackgroundResource(R.drawable.hyshu);
+            this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         editor=pref.edit();
         WOut=findViewById(R.id.WOut);
@@ -142,12 +152,12 @@ public class CompleteRecord3 extends Activity {
         if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_PORTRAIT) {
             //竖屏
             this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            record.setBackgroundResource(R.drawable.pkq);
+            record.setBackgroundResource(R.drawable.hyshu);
         }
         else if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_LANDSCAPE) {
 //横屏
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
-            record.setBackgroundResource(R.drawable.pkqheng);
+            record.setBackgroundResource(R.drawable.hyheng);
         }
     }
 }

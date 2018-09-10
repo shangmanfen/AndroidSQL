@@ -53,7 +53,30 @@ public class FindVersion
         }
         return result;
     }
+    public static String FindDetail(String sql)
+    {
+        String result = "";
+        try
+        {
+            Connection conn = getSQLConnection("43.243.128.36", "health", "13240670", "health");
 
+            Statement stmt = conn.createStatement();//
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next())
+            {
+                result = rs.getString("Detail");
+                System.out.println(result);
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            result += "查询数据异常!" + e.getMessage();
+        }
+        return result;
+    }
     public static void main(String[] args)
     {
         // QuerySQL();

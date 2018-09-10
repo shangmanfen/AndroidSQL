@@ -34,4 +34,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="title_activity_main_choose1">MainChoose1</string>
+
+    <string name="title_activity_workharding">workharding</string>
+
 </resources>

@@ -161,7 +161,7 @@ public class MainActivity extends Activity {
                         editor.putString("account",userName.getText().toString());
                         editor.putString("password",Password.getText().toString());
                         editor.commit();
-                        startActivity(new Intent(MainActivity.this,MainChoose.class));
+                        startActivity(new Intent(MainActivity.this,MainChoose1.class));
                         MainActivity.this.finish();
                         break;
 

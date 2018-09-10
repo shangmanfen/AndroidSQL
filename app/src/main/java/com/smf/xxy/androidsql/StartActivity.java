@@ -1,6 +1,8 @@
 package com.smf.xxy.androidsql;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -27,7 +29,7 @@ import cn.waps.AppListener;
 public class StartActivity extends Activity {
     public static StartActivity instance=null;
     private SharedPreferences pref;
-    String version="V18090501";
+    String version="V180909";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class StartActivity extends Activity {
         instance=this;
         findVersion();
     }
+    String VersionDetail;
     private void findVersion()
     {
         Runnable run = new Runnable()
@@ -51,10 +54,11 @@ public class StartActivity extends Activity {
             {
                 try{
                     Message msg = new Message();
-                    String sql = "SELECT [Version] FROM [Version]";
+                    String sql = "SELECT [Version],[Detail] FROM [Version]";
                     try {
                         String ret = FindVersion.QuerySQL(sql);
                         ret=ret.trim();
+                        VersionDetail=FindVersion.FindDetail(sql).trim();
                         //version=pref.getString("version","");
                         if(version.equals(ret))
                         {
@@ -87,6 +91,52 @@ public class StartActivity extends Activity {
         };
         new Thread(run).start();
     }
+    private void remindNew(){
+        //    通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象
+        AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this);
+        //    设置Title的图标
+        builder.setIcon(R.drawable.logo);
+        builder.setTitle("检测到新版本");
+        //    设置Content来显示一个信息
+        builder.setMessage("更新："+VersionDetail);
+        //    设置一个PositiveButton
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Uri uri = Uri.parse("https://pan.baidu.com/s/1N86ljCmSa_je3NoSTBAS0g");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                StartActivity.this.finish();
+            }
+        });
+        //    设置一个NeutralButton
+        builder.setNeutralButton("忽略", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                final String account=pref.getString("account","");
+                final String password=pref.getString("password","");
+                Timer timer=new Timer();
+                TimerTask timerTask=new TimerTask() {
+                    @Override
+                    public void run() {
+                        if(!account.equals("") & !password.equals("")){
+                            startActivity(new Intent(StartActivity.this,MainChoose1.class));
+                            StartActivity.this.finish();}
+                        else {
+                            startActivity(new Intent(StartActivity.this, MainActivity.class));
+                            StartActivity.this.finish();
+                        }
+                    }
+                };timer.schedule(timerTask,2000);
+            }
+        });
+        //    显示出该对话框
+        builder.show();
+    }
     Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
             switch (msg.what)
@@ -102,7 +152,7 @@ public class StartActivity extends Activity {
                         @Override
                         public void run() {
                             if(!account.equals("") & !password.equals("")){
-                                startActivity(new Intent(StartActivity.this,MainChoose.class));
+                                startActivity(new Intent(StartActivity.this,MainChoose1.class));
                                 StartActivity.this.finish();}
                             else {
                                 startActivity(new Intent(StartActivity.this, MainActivity.class));
@@ -112,11 +162,8 @@ public class StartActivity extends Activity {
                     };timer.schedule(timerTask,2000);
                     break;
                 case 1005:
-                    Toast.makeText(StartActivity.this,"请更新至最新版本",Toast.LENGTH_LONG).show();
-                    Uri uri = Uri.parse("https://pan.baidu.com/s/1N86ljCmSa_je3NoSTBAS0g");
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                    StartActivity.this.finish();
+                    //Toast.makeText(StartActivity.this,"请更新至最新版本",Toast.LENGTH_LONG).show();
+                    remindNew();
                     break;
             }
         };

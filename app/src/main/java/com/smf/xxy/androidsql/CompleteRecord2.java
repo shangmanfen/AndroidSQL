@@ -58,7 +58,7 @@ public class CompleteRecord2 extends Activity {
             tt.setVisibility(View.VISIBLE);
             EditText ett=findViewById(R.id.recordText1);
             ett.setVisibility(View.VISIBLE);
-            record.setBackgroundResource(R.drawable.pkqheng);
+            record.setBackgroundResource(R.drawable.hyheng);
         } else if (ori == mConfiguration.ORIENTATION_PORTRAIT) {
             //竖屏
             TextView t=findViewById(R.id.textView3);
@@ -69,7 +69,7 @@ public class CompleteRecord2 extends Activity {
             tt.setVisibility(View.GONE);
             EditText ett=findViewById(R.id.recordText1);
             ett.setVisibility(View.GONE);
-            record.setBackgroundResource(R.drawable.pkq);
+            record.setBackgroundResource(R.drawable.hyshu);
         }
         WJobContent=findViewById(R.id.WJobContent);
         WUncompleted=findViewById(R.id.WUncompleted);
@@ -161,7 +161,7 @@ public class CompleteRecord2 extends Activity {
             EditText ett=findViewById(R.id.recordText1);
             ett.setVisibility(View.GONE);
             et.setText(ett.getText().toString());
-            record.setBackgroundResource(R.drawable.pkq);
+            record.setBackgroundResource(R.drawable.hyshu);
         }
         else if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_LANDSCAPE) {
 //横屏
@@ -177,7 +177,7 @@ public class CompleteRecord2 extends Activity {
             EditText et=findViewById(R.id.RecordText);
             et.setVisibility(View.GONE);
             ett.setText(et.getText().toString());
-            record.setBackgroundResource(R.drawable.pkqheng);
+            record.setBackgroundResource(R.drawable.hyheng);
         }
     }
     public void save(View v){

@@ -2,15 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smf.xxy.androidsql">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <meta-data android:name="APP_ID" android:value="1e5ac5ce3f406f4cf407ceb62bd8a42f"/>
-    <meta-data android:name="APP_PID" android:value="default"/>
+
+    <meta-data
+        android:name="APP_ID"
+        android:value="1e5ac5ce3f406f4cf407ceb62bd8a42f" />
+    <meta-data
+        android:name="APP_PID"
+        android:value="default" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -58,6 +63,28 @@
             android:name=".CompleteRecord3"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_complete_record3"
+            android:theme="@style/FullscreenTheme" />
+        <!-- 支付宝H5页面支付用的 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <!-- 支付宝App支付页面用的 -->
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".MainChoose1"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_main_choose1"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".workharding"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_workharding"
             android:theme="@style/FullscreenTheme"></activity>
     </application>
 

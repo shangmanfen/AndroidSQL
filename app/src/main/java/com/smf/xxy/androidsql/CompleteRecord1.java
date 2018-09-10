@@ -44,23 +44,6 @@ public class CompleteRecord1 extends Activity {
     private Calendar calendar1;// 用来装日期的
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    //自定义变量
-    private EditText titleEdit;
-    private EditText dateEdit;
-    private EditText timeEdit;
-    private EditText contentEdit;
-    //底部四个布局按钮
-    private LinearLayout layoutDate;
-    private LinearLayout layoutTime;
-    private LinearLayout layoutCancel;
-    private LinearLayout layoutSave;
-    //定义显示时间控件
-    private Calendar calendar; //通过Calendar获取系统时间
-    private int mYear;
-    private int mMonth;
-    private int mDay;
-    private int mHour;
-    private int mMinute;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

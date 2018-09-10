@@ -15,6 +15,7 @@ import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -38,18 +39,16 @@ import java.util.TimerTask;
 import cn.waps.AppConnect;
 
 public class MainChoose extends Activity {
-
-    ImageButton zong;
     ImageView buttonbg,textbg;
     public static ImageView describe,introduce;
     private SharedPreferences pref1;
-    public  static String account;
+    public  static String account,yingdaoflag;
     TextView textView;
     //手指按下的点为(x1, y1)手指离开屏幕的点为(x2, y2)
     float x1 = 0;
     float x2 = 0;
     float y1 = 0;
-    float y2 = 0;
+    float y2 = 0;private SharedPreferences.Editor editor;ConstraintLayout yingdao3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,15 @@ public class MainChoose extends Activity {
         AppConnect.getInstance(this).showMiniAd(this, miniLayout, 10); //默认 10 秒切换一次广告
         textView=findViewById(R.id.textView1);
         pref1= PreferenceManager.getDefaultSharedPreferences(this);
+        yingdao3=findViewById(R.id.yingdao3);
         account=pref1.getString("account","");
+        yingdaoflag=pref1.getString("yingdao2","");
+        if(yingdaoflag.equals("")){
+            yingdao3.setVisibility(View.VISIBLE);
+            editor=pref1.edit();
+            editor.putString("yingdao2","HasAppear");
+            editor.commit();
+        }
         String tiexinwenhouyu="";
         Calendar calendar = Calendar.getInstance();
 //获取系统的日期
@@ -78,10 +85,10 @@ public class MainChoose extends Activity {
         else if(hour<=23 & hour>18){ tiexinwenhouyu="晚上好~"; }
         else if(hour>23||hour<=3){ tiexinwenhouyu="夜深啦~"; }
         textView.setText(account+","+tiexinwenhouyu);
-        buttonbg=findViewById(R.id.imageButton3);zong=findViewById(R.id.imageButton2);textbg=findViewById(R.id.textbg);
+        buttonbg=findViewById(R.id.imageButton3);textbg=findViewById(R.id.textbg);
         describe=findViewById(R.id.describe);introduce=findViewById(R.id.introduce);
         introduce.setClickable(false);describe.setClickable(false);
-        setontouch();
+        setontouch();Start();
         PropertyValuesHolder alpha1 = PropertyValuesHolder.ofFloat("alpha", 0f);
         ObjectAnimator.ofPropertyValuesHolder(buttonbg, alpha1).setDuration(100).start();
         ObjectAnimator.ofPropertyValuesHolder(describe, alpha1).setDuration(100).start();
@@ -149,7 +156,7 @@ public class MainChoose extends Activity {
                     //使用play方法把两个动画拼接起来
                     animatorSet.play(objectAnimator3);
                     //时间
-                    animatorSet.setDuration(2000);
+                    animatorSet.setDuration(900);
                     //开始执行
                     animatorSet.start();
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
@@ -162,7 +169,7 @@ public class MainChoose extends Activity {
                     //使用play方法把两个动画拼接起来
                     animatorSet.play(objectAnimator3);
                     //时间
-                    animatorSet.setDuration(2000);
+                    animatorSet.setDuration(900);
                     //开始执行
                     animatorSet.start();
                 }
@@ -183,13 +190,19 @@ public class MainChoose extends Activity {
         if(event.getAction() == MotionEvent.ACTION_UP) {
             //当手指离开的时候
             x2 = event.getX();
-            y2 = event.getY();
-            /*if(y1 - y2 > 50) {
-                Toast.makeText(MainChoose.this, "向上滑", Toast.LENGTH_SHORT).show();
-            } else if(y2 - y1 > 50) {
-                Toast.makeText(MainChoose.this, "向下滑", Toast.LENGTH_SHORT).show();}*/
-            if(x1 - x2 > 50) {
-                //Toast.makeText(MainChoose.this, "向左滑", Toast.LENGTH_SHORT).show();
+            y2 = event.getY();/*if(y1 - y2 > 50) {Toast.makeText(MainChoose.this, "向上滑", Toast.LENGTH_SHORT).show();} else if(y2 - y1 > 50) {Toast.makeText(MainChoose.this, "向下滑", Toast.LENGTH_SHORT).show();}*/
+            if(x1 - x2 > 50) {//Toast.makeText(MainChoose.this, "向左滑", Toast.LENGTH_SHORT).show();
+                PropertyValuesHolder alpha1 = PropertyValuesHolder.ofFloat("alpha",1f);
+                PropertyValuesHolder translationX1 = PropertyValuesHolder.ofFloat("translationX",20f,0f);
+                ObjectAnimator objectAnimator1 = ObjectAnimator.ofPropertyValuesHolder(textbg,translationX1, alpha1);
+                ObjectAnimator objectAnimator2 = ObjectAnimator.ofPropertyValuesHolder(introduce,translationX1, alpha1);
+                AnimatorSet animatorSet = new AnimatorSet();
+                //使用play方法把两个动画拼接起来
+                animatorSet.play(objectAnimator2).with(objectAnimator1);
+                //时间
+                animatorSet.setDuration(200);
+                //开始执行
+                animatorSet.start();
                 if(aaa==1){
                     introduce.setBackgroundResource(R.drawable.gosimple);
                     bbb="simple";
@@ -199,8 +212,21 @@ public class MainChoose extends Activity {
                     bbb="complete";
                     aaa++;
                 }
-            } else if(x2 - x1 > 50) {
-                //Toast.makeText(MainChoose.this, "向右滑", Toast.LENGTH_SHORT).show();
+            } else if(x2 - x1 > 50) {//Toast.makeText(MainChoose.this, "向右滑", Toast.LENGTH_SHORT).show();
+                if(yingdao3.getVisibility()==View.VISIBLE){
+                    yingdao3.setVisibility(View.GONE);
+                }
+                PropertyValuesHolder alpha1 = PropertyValuesHolder.ofFloat("alpha",1f);
+                PropertyValuesHolder translationX1 = PropertyValuesHolder.ofFloat("translationX",-20f,0f);
+                ObjectAnimator objectAnimator1 = ObjectAnimator.ofPropertyValuesHolder(textbg,translationX1, alpha1);
+                ObjectAnimator objectAnimator2 = ObjectAnimator.ofPropertyValuesHolder(introduce,translationX1, alpha1);
+                AnimatorSet animatorSet = new AnimatorSet();
+                //使用play方法把两个动画拼接起来
+                animatorSet.play(objectAnimator2).with(objectAnimator1);
+                //时间
+                animatorSet.setDuration(200);
+                //开始执行
+                animatorSet.start();
                 if(aaa==0){
                     introduce.setBackgroundResource(R.drawable.gocomplete);
                     bbb="complete";
@@ -214,11 +240,10 @@ public class MainChoose extends Activity {
         }
         return super.onTouchEvent(event);
     }
-    public void Start(View v){
+    private void Start(){
     PropertyValuesHolder alpha1 = PropertyValuesHolder.ofFloat("alpha", 1f, 0f);
     PropertyValuesHolder scaleX1 = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.1f, 0f);
     PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.1f, 0f);
-    ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(zong, alpha1, scaleX1, scaleY).setDuration(800);
     //可以直接执行,不过不能拼接动画，这是组合动画
     //ObjectAnimator.ofPropertyValuesHolder(zong, alpha1, scaleX1, scaleY).setDuration(900).start();
     PropertyValuesHolder alpha2 = PropertyValuesHolder.ofFloat("alpha", 0f, 1f);
@@ -236,12 +261,11 @@ public class MainChoose extends Activity {
     //实例化AnimatorSet
     AnimatorSet animatorSet = new AnimatorSet();
     //使用play方法把两个动画拼接起来
-    animatorSet.play(objectAnimator1).with(objectAnimator3).with(objectAnimator4).with(objectAnimator5).after(objectAnimator);
+    animatorSet.play(objectAnimator1).with(objectAnimator3).with(objectAnimator4).with(objectAnimator5);
     //时间
     animatorSet.setDuration(800);
     //开始执行
     animatorSet.start();
-    zong.setClickable(false);
     introduce.setClickable(true);describe.setClickable(true);
 }
     private void goSimple(){
@@ -269,8 +293,9 @@ public class MainChoose extends Activity {
             System.exit(0);
         }
     }
-    public void reLogin(View v){
-        startActivity(new Intent(MainChoose.this,MainActivity.class));
+    public void reBack(View v){
+        startActivity(new Intent(MainChoose.this,MainChoose1.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         MainChoose.this.finish();
     }
 }
