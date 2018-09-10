@@ -82,7 +82,7 @@
             android:label="@string/title_activity_main_choose1"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".workharding"
+            android:name=".ExpenseRecord"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_workharding"
             android:theme="@style/FullscreenTheme"></activity>

@@ -153,6 +153,7 @@ public class StartActivity extends Activity {
                         public void run() {
                             if(!account.equals("") & !password.equals("")){
                                 startActivity(new Intent(StartActivity.this,MainChoose1.class));
+                                //startActivity(new Intent(StartActivity.this, ExpenseRecord.class));
                                 StartActivity.this.finish();}
                             else {
                                 startActivity(new Intent(StartActivity.this, MainActivity.class));

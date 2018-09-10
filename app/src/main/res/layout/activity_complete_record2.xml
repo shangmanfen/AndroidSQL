@@ -202,6 +202,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:editable="false"
         android:hint="请输入工作类型"
         android:onClick="selectIobContent"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
