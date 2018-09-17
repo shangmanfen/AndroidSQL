@@ -28,13 +28,14 @@ public class ExpenseRecord extends Activity {
     public void selectIobContent(View v){
         showSingleDialog();
     }
-    String No;SharedPreferences pref; String account,UniqueCode,b,c,TypeDate,Type;
+    String No;SharedPreferences pref;
+    String account,UniqueCode,b,c,TypeDate,Type;
     TextView ENo,EEYear,EName,EEMonth,EMoney,EDetails,EType;String EYear,EMonth,Money,Details;
     public void FormLoad(){
-        ENo=findViewById(R.id.ENo);EEYear=findViewById(R.id.EEYear);
-        EName=findViewById(R.id.EName);EEMonth=findViewById(R.id.EEMonth);
-        TextView ETypeDate=findViewById(R.id.ETypeDate);EMoney=findViewById(R.id.EMoney);
-        EType=findViewById(R.id.EType);EDetails=findViewById(R.id.EDetails);
+        ENo=findViewById(R.id.TRecordNo);EEYear=findViewById(R.id.EEYear);
+        EName=findViewById(R.id.TName);EEMonth=findViewById(R.id.EEMonth);
+        TextView ETypeDate=findViewById(R.id.ETypeDate);EMoney=findViewById(R.id.TDestination);
+        EType=findViewById(R.id.TWType);EDetails=findViewById(R.id.EDetails);
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         account=pref.getString("account","");
         chooseTime();
@@ -76,7 +77,7 @@ public class ExpenseRecord extends Activity {
         save();
     }
     private void showSingleDialog() {
-        final TextView EType=findViewById(R.id.EType);
+        final TextView EType=findViewById(R.id.TWType);
         EType.setText("");
         AlertDialog.Builder builder = new AlertDialog.Builder(ExpenseRecord.this);
         builder.setTitle("类别：");
@@ -165,7 +166,7 @@ public class ExpenseRecord extends Activity {
     }
     private void findb()
     {
-        Runnable run = new Runnable()
+        bb = new Runnable()
         {
             @Override
             public void run()
@@ -175,7 +176,7 @@ public class ExpenseRecord extends Activity {
                     String sql="SELECT * FROM ExpenseRecord where No like '"+No+"%'";
                     try {
                         b=DBUtil.QuerySQL(sql,"No");
-msg.what=1002;
+                        msg.what=1002;
                         Bundle data = new Bundle();
 
                         msg.setData(data);
@@ -195,11 +196,12 @@ msg.what=1002;
                 }
             }
         };
-        new Thread(run).start();
+        new Thread(bb).start();
     }
+    Runnable code,bb,cc;
     private void findcode()
     {
-        Runnable run = new Runnable()
+        code = new Runnable()
         {
             @Override
             public void run()
@@ -229,11 +231,11 @@ msg.what=1002;
                 }
             }
         };
-        new Thread(run).start();
+        new Thread(code).start();
     }
     private void findc()
     {
-        Runnable run = new Runnable()
+        cc = new Runnable()
         {
             @Override
             public void run()
@@ -263,7 +265,7 @@ msg.what=1002;
                 }
             }
         };
-        new Thread(run).start();
+        new Thread(cc).start();
     }
     Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
@@ -275,14 +277,18 @@ msg.what=1002;
                         No="H"+a+"0"+month+UniqueCode;
                     else
                         No = "H" +a+month+UniqueCode;
+                    mHandler.removeCallbacks(code);
                     findb();
                     break;
-
                 case 1002:
-                    if(b.trim().equals(""))
-                        No=No+"01";
-                    else
-                        findc();
+                    if(b.equals("")) {
+                        No = No + "01";
+                        ENo.setText(No);
+                        mHandler.removeCallbacks(bb);
+                    }
+                    else{
+                        mHandler.removeCallbacks(bb);
+                        findc();}
                     break;
                 case 1003:
                     Toast.makeText(ExpenseRecord.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
@@ -294,6 +300,7 @@ msg.what=1002;
                         c="0"+(convertToInt(c,0)+1);
                     No=No+c;
                     ENo.setText(No);
+                    mHandler.removeCallbacks(cc);
                     break;
                 case 1005:
                     startActivity(new Intent(ExpenseRecord.this,success.class));
@@ -314,5 +321,10 @@ msg.what=1002;
             return defaultValue;
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ExpenseRecord.this,MainChoose1.class));
+        ExpenseRecord.this.finish();
     }
 }

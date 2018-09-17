@@ -209,7 +209,7 @@ public class CompleteRecord2 extends Activity {
         editor.putString("WPartner","");
         editor.putString("WLeaveDay","年/月/日");
         editor.putString("WLeaveTime","时:分");
-        editor.putString("WWorkRecordNo","");
+        //editor.putString("WWorkRecordNo","");
         editor.putString("WOutDay","年/月/日");
         editor.putString("WOutTime","时:分");
         editor.putString("WArriveDay","年/月/日");

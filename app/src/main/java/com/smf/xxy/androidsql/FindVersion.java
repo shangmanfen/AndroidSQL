@@ -65,7 +65,7 @@ public class FindVersion
             while (rs.next())
             {
                 result = rs.getString("Detail");
-                System.out.println(result);
+                //System.out.println(result);
             }
             rs.close();
             stmt.close();

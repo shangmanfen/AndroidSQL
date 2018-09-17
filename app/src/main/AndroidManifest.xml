@@ -64,18 +64,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_complete_record3"
             android:theme="@style/FullscreenTheme" />
-        <!-- 支付宝H5页面支付用的 -->
-        <activity
-            android:name="com.alipay.sdk.app.H5PayActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind" />
-        <!-- 支付宝App支付页面用的 -->
-        <activity
-            android:name="com.alipay.sdk.auth.AuthActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind" />
         <activity
             android:name=".MainChoose1"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -85,7 +73,20 @@
             android:name=".ExpenseRecord"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_workharding"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".TExpenseIn1"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_texpense_in"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".TExpenseIn2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="TExpenseIn2"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>

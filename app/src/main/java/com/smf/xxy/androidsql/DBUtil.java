@@ -73,6 +73,33 @@ public class DBUtil
         }
         return result;
     }
+    public static String[] FindLot(String sql,String name[])
+    {
+        String [] result=new String[name.length];
+        try
+        {
+            Connection conn = getSQLConnection("43.243.128.36", "health", "13240670", "health");
+            Statement stmt = conn.createStatement();//
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next())
+            {
+                for(int i=0;i<(name.length-1);i++){
+                    String a=name[i];
+                    String b = rs.getString(""+a);
+                    result[i]=b;
+                }
+                System.out.println(result);
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            //result += "查询数据异常!" + e.getMessage();
+        }
+        return result;
+    }
     public static void main(String[] args)
     {
         // QuerySQL();

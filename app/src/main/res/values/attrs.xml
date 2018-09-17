@@ -8,5 +8,9 @@
         <attr name="metaButtonBarStyle" format="reference" />
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
+    <string-array name="spingarr">
+        <item>是</item>
+        <item>否</item>
+    </string-array>
 
 </resources>

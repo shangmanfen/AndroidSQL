@@ -29,7 +29,7 @@ import cn.waps.AppListener;
 public class StartActivity extends Activity {
     public static StartActivity instance=null;
     private SharedPreferences pref;
-    String version="V180909";
+    String version="V180911";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +45,10 @@ public class StartActivity extends Activity {
         findVersion();
     }
     String VersionDetail;
+    Runnable run;
     private void findVersion()
     {
-        Runnable run = new Runnable()
+        run = new Runnable()
         {
             @Override
             public void run()
@@ -68,10 +69,6 @@ public class StartActivity extends Activity {
                         {
                             msg.what=1005;
                         }
-                        Bundle data = new Bundle();
-                        data.putString("result", ret);
-
-                        msg.setData(data);
                         mHandler.sendMessage(msg);
                     }
                     catch(Exception e){
@@ -152,12 +149,14 @@ public class StartActivity extends Activity {
                         @Override
                         public void run() {
                             if(!account.equals("") & !password.equals("")){
-                                startActivity(new Intent(StartActivity.this,MainChoose1.class));
-                                //startActivity(new Intent(StartActivity.this, ExpenseRecord.class));
-                                StartActivity.this.finish();}
+                                //startActivity(new Intent(StartActivity.this,MainChoose1.class));
+                                startActivity(new Intent(StartActivity.this, TExpenseIn1.class));
+                                StartActivity.this.finish();
+                                mHandler.removeCallbacks(run); }
                             else {
                                 startActivity(new Intent(StartActivity.this, MainActivity.class));
                                 StartActivity.this.finish();
+                                mHandler.removeCallbacks(run);
                             }
                         }
                     };timer.schedule(timerTask,2000);

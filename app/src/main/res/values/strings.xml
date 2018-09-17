@@ -38,4 +38,8 @@
 
     <string name="title_activity_workharding">workharding</string>
 
+    <string name="title_activity_texpense_in">TExpenseIn</string>
+
+    <string name="title_activity_pull_down_menu">PullDownMenu</string>
+
 </resources>
