@@ -32,8 +32,8 @@ public class ExpenseRecord extends Activity {
     String account,UniqueCode,b,c,TypeDate,Type;
     TextView ENo,EEYear,EName,EEMonth,EMoney,EDetails,EType;String EYear,EMonth,Money,Details;
     public void FormLoad(){
-        ENo=findViewById(R.id.TRecordNo);EEYear=findViewById(R.id.EEYear);
-        EName=findViewById(R.id.TName);EEMonth=findViewById(R.id.EEMonth);
+        ENo=findViewById(R.id.TOther1Name);EEYear=findViewById(R.id.EEYear);
+        EName=findViewById(R.id.TOther2Name);EEMonth=findViewById(R.id.EEMonth);
         TextView ETypeDate=findViewById(R.id.ETypeDate);EMoney=findViewById(R.id.TDestination);
         EType=findViewById(R.id.TWType);EDetails=findViewById(R.id.EDetails);
         pref= PreferenceManager.getDefaultSharedPreferences(this);

@@ -1,21 +1,18 @@
 package com.smf.xxy.androidsql;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -23,8 +20,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import cn.waps.AppConnect;
 
 public class CompleteRecord1 extends Activity {
     Button WOutDay1;
@@ -47,6 +42,7 @@ public class CompleteRecord1 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏
         setContentView(R.layout.activity_complete_record1);
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         editor=pref.edit();
@@ -83,7 +79,7 @@ public class CompleteRecord1 extends Activity {
     }
     @Override
     public void onBackPressed() {
-            CompleteRecord1.this.finish();
+        CompleteRecord1.this.finish();
         MainChoose.introduce.setClickable(true);MainChoose.describe.setClickable(true);
     }
     public static boolean IsOut=false;
@@ -112,12 +108,12 @@ public class CompleteRecord1 extends Activity {
             try{
                 if(stringToDate(OutTime).getTime()!=stringToDate("1900-1-1 0:0:0").getTime() & stringToDate(LeaveTime).getTime()!=stringToDate("1900-1-1 0:0:0").getTime()){
                     if(stringToDate(OutTime).getTime()>stringToDate(ArriveTime).getTime()){
-                    Toast.makeText(CompleteRecord1.this,"出发时间不能晚于到达时间!",Toast.LENGTH_SHORT).show();
-                    return;
+                        Toast.makeText(CompleteRecord1.this,"出发时间不能晚于到达时间!",Toast.LENGTH_SHORT).show();
+                        return;
                     }
                     else if(stringToDate(LeaveTime).getTime()<stringToDate(ArriveTime).getTime()){
-                    Toast.makeText(CompleteRecord1.this,"离开时间不能早于到达时间!",Toast.LENGTH_SHORT).show();
-                    return;
+                        Toast.makeText(CompleteRecord1.this,"离开时间不能早于到达时间!",Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 }
             }catch (Exception e){}
@@ -128,21 +124,21 @@ public class CompleteRecord1 extends Activity {
     private static  String WorkTime="时:分";
     private static  String ExtraTime="时:分";
     private  void next(){
-            if (WWorkTime1.getText().toString().trim().equals("时:分")||WWorkTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
-                WorkTime = "1900-1-1 0:0:0";
-            else
-                WorkTime =WWorkTime1.getText().toString()+ ":0";
-            if (WExtraTime1.getText().toString().trim().equals("时:分")||WExtraTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
-                ExtraTime = "1900-1-1 0:0:0";
-            else
-                ExtraTime = WExtraTime1.getText().toString()+ ":0";
-            if(TrafficTime1.getText().toString().trim().equals("时:分")||TrafficTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
-                TrafficTime = "1900-1-1 0:0:0";
-            else
-                TrafficTime = TrafficTime1.getText().toString().trim()+ ":0";
-            chuanzhi();
-            startActivity(new Intent(CompleteRecord1.this,CompleteRecord3.class));
-            CompleteRecord1.this.finish();
+        if (WWorkTime1.getText().toString().trim().equals("时:分")||WWorkTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
+            WorkTime = "1900-1-1 0:0:0";
+        else
+            WorkTime =WWorkTime1.getText().toString()+ ":0";
+        if (WExtraTime1.getText().toString().trim().equals("时:分")||WExtraTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
+            ExtraTime = "1900-1-1 0:0:0";
+        else
+            ExtraTime = WExtraTime1.getText().toString()+ ":0";
+        if(TrafficTime1.getText().toString().trim().equals("时:分")||TrafficTime1.getText().toString().trim().equals("1900-1-1 0:0:0"))
+            TrafficTime = "1900-1-1 0:0:0";
+        else
+            TrafficTime = TrafficTime1.getText().toString().trim()+ ":0";
+        chuanzhi();
+        startActivity(new Intent(CompleteRecord1.this,CompleteRecord3.class));
+        CompleteRecord1.this.finish();
         MainChoose.introduce.setClickable(true);MainChoose.describe.setClickable(true);
     }
     // strTime要转换的string类型的时间，formatType要转换的格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日
@@ -156,15 +152,15 @@ public class CompleteRecord1 extends Activity {
     }
     int year,month,day,hour,minute;
     public  void chooseTime(){
-    //获取日历的一个对象
-    calendar1=Calendar.getInstance();
-    //获取年月日时分秒信息
-    year=calendar1.get(Calendar.YEAR);
-    month=calendar1.get(Calendar.MONTH);
-    day=calendar1.get(Calendar.DAY_OF_MONTH);
-    hour=calendar1.get(Calendar.HOUR_OF_DAY);
-    minute=calendar1.get(Calendar.MINUTE);
-}
+        //获取日历的一个对象
+        calendar1=Calendar.getInstance();
+        //获取年月日时分秒信息
+        year=calendar1.get(Calendar.YEAR);
+        month=calendar1.get(Calendar.MONTH);
+        day=calendar1.get(Calendar.DAY_OF_MONTH);
+        hour=calendar1.get(Calendar.HOUR_OF_DAY);
+        minute=calendar1.get(Calendar.MINUTE);
+    }
     // TODO: 选择交通时间
     public  void getTrafficTime(View v){
         chooseTime();
@@ -181,7 +177,7 @@ public class CompleteRecord1 extends Activity {
             }
         });
         dialog1.show();
-}
+    }
     // TODO: 选择正常工作时间
     public  void getWWorkTime(View v){
         chooseTime();
@@ -408,7 +404,7 @@ public class CompleteRecord1 extends Activity {
     private void fuzhi(){
         if(pref.getString("WorkTime","时:分").equals("时:分")){WorkTime=pref.getString("WorkTime","时:分");}
         else
-        WorkTime=pref.getString("WorkTime","时:分").substring(0,pref.getString("WorkTime","时:分").length()-2);
+            WorkTime=pref.getString("WorkTime","时:分").substring(0,pref.getString("WorkTime","时:分").length()-2);
         if(pref.getString("ExtraTime","时:分").equals("时:分")){ExtraTime=pref.getString("ExtraTime","时:分");}
         else
             ExtraTime=pref.getString("ExtraTime","时:分").substring(0,pref.getString("ExtraTime","时:分:0").length()-2);

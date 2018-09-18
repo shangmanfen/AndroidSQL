@@ -106,7 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ETypeDate2"
-            app:layout_constraintTop_toBottomOf="@+id/TTaxiTicket"
+            app:layout_constraintTop_toBottomOf="@+id/TTotal"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -123,7 +123,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TRecordNo"
+            app:layout_constraintStart_toStartOf="@+id/TOther1Name"
             app:layout_constraintTop_toBottomOf="@+id/TIsDone" />
 
         <TextView
@@ -206,7 +206,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TTaxiTicket"
+            app:layout_constraintStart_toEndOf="@+id/TTotal"
             app:layout_constraintTop_toTopOf="@+id/ETypeDate"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -227,11 +227,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/TAllowance"
+            app:layout_constraintTop_toBottomOf="@+id/TOther3"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TTaxiTicket"
+            android:id="@+id/TTotal"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -246,11 +246,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ETypeDate"
-            app:layout_constraintTop_toBottomOf="@+id/THotelExpense"
+            app:layout_constraintTop_toBottomOf="@+id/TOther3Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TAllowance"
+            android:id="@+id/TOther3"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -267,7 +267,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/TBusTicket"
+            app:layout_constraintTop_toBottomOf="@+id/TOther2"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -286,12 +286,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TName"
+            app:layout_constraintStart_toEndOf="@+id/TOther2Name"
             app:layout_constraintTop_toTopOf="@+id/textView17"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/THotelExpense"
+            android:id="@+id/TOther3Name"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -304,12 +304,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TRecordNo"
-            app:layout_constraintTop_toBottomOf="@+id/TName"
+            app:layout_constraintStart_toStartOf="@+id/TOther1Name"
+            app:layout_constraintTop_toBottomOf="@+id/TOther2Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TBoatTicket"
+            android:id="@+id/TOther1"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -319,7 +319,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:background="@android:drawable/editbox_background"
-            android:enabled="false"
             android:hint="元"
             android:inputType="number"
             android:textColor="@android:color/black"
@@ -347,7 +346,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TName"
+            app:layout_constraintStart_toEndOf="@+id/TOther2Name"
             app:layout_constraintTop_toBottomOf="@+id/textView16"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -367,12 +366,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TRecordNo"
+            app:layout_constraintStart_toEndOf="@+id/TOther1Name"
             app:layout_constraintTop_toTopOf="@+id/textView16"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TBusTicket"
+            android:id="@+id/TOther2"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -389,7 +388,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/TBoatTicket"
+            app:layout_constraintTop_toBottomOf="@+id/TOther1"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -433,7 +432,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TName"
+            android:id="@+id/TOther2Name"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -446,8 +445,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TRecordNo"
-            app:layout_constraintTop_toBottomOf="@+id/TRecordNo"
+            app:layout_constraintStart_toStartOf="@+id/TOther1Name"
+            app:layout_constraintTop_toBottomOf="@+id/TOther1Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -472,7 +471,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TRecordNo"
+            android:id="@+id/TOther1Name"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -482,8 +481,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:background="@android:drawable/editbox_background"
-            android:editable="false"
-            android:enabled="false"
             android:inputType="none"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -546,6 +543,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="保存"
+        android:onClick="getData"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

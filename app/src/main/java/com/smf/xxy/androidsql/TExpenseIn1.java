@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +24,7 @@ public class TExpenseIn1 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_texpense_in);
         SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
         Name=pref.getString("account","");
@@ -31,11 +32,21 @@ public class TExpenseIn1 extends Activity {
         WorkRecordNo="2018091401";
         findid();
         findb();
-    }
-    public void next(View v){
 
     }
-    Runnable code,bb,cc;String result[]={};
+    public void next(View v){
+        if (TWDate.getText().toString().equals(""))
+            Toast.makeText(TExpenseIn1.this,"日期不能为空！",Toast.LENGTH_SHORT).show();
+        else if (TCity.getText().toString().equals(""))
+            Toast.makeText(TExpenseIn1.this,"城市不能为空！",Toast.LENGTH_SHORT).show();
+        else if(TDestination.getText().toString().equals(""))
+            Toast.makeText(TExpenseIn1.this,"目的地不能为空！",Toast.LENGTH_SHORT).show();
+        else if(TWType.getText().toString().equals(""))
+            Toast.makeText(TExpenseIn1.this,"事由不能为空！",Toast.LENGTH_SHORT).show();
+        else
+            Insert();
+    }
+    Runnable bb,cc;String result[]={};
     private void findb()
     {
         bb = new Runnable()
@@ -190,6 +201,31 @@ public class TExpenseIn1 extends Activity {
             builder.show();
         }
     }
+    private void Insert(){
+        SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase("/data/data/com.smf.xxy.androidsql/HY.db",null);
+        try{
+            //String sql="delete from texpense1";db.execSQL(sql);
+            String sql="create table IF NOT EXISTS texpense1(" +
+                    "name char(10),recordNo char(10),WDate date,City char(15)," +
+                    "Destination char(15),WType char(20),Partner char(30)," +
+                    "PlaneTicket float,TrainTicket float,BoatTicket float,BusTicket float,TaxiTicket float,HotelExpense float,Allowance float," +
+                    "Other1Name char(20),Other1 float,Other2Name char(20),Other2 float,Other3Name char(20),Other3 float,Total float,TicketNo INTEGER," +
+                    "IsDone char(3),Remark char(500),EYear INTEGER,EMonth INTEGER," +
+                    "primary key (name,recordNo)" +
+                    ")";
+            db.execSQL(sql);
+            sql="insert into texpense1 values ('" +Name + "' , '" + WorkRecordNo + "' , '" + TWDate.getText().toString() + "' , '" +
+                TCity.getText().toString() + "' , '" + TDestination.getText().toString() + "' , '" + TWType.getText().toString() + "' , '" +
+                TPartner.getText().toString() + "' , '" + TPlaneTicket.getText().toString() + "' , '" + TTrainTicket.getText().toString() + "' ,' " +
+                TBoatTicket.getText().toString() + "' , '" + TBusTicket.getText().toString() + "' ,'" + TTaxiTicket.getText().toString() +"' , '" +
+                THotelExpense.getText().toString() + "' , '"+ TAllowance.getText().toString() +"' , '0' , 0 , '0' , 0 , '0' ,0 , 0 , 0, '0', '0', 0,0"+
+                ")";
+            db.execSQL(sql);Toast.makeText(TExpenseIn1.this,"成功插入数据。",Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception a){
+            Toast.makeText(TExpenseIn1.this,"未成功插入数据。",Toast.LENGTH_SHORT).show();
+        }
+    }
     Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
             switch (msg.what)
@@ -249,10 +285,10 @@ public class TExpenseIn1 extends Activity {
         };
     };
     private void findid(){
-        TName=findViewById(R.id.TName);TRecordNo=findViewById(R.id.TRecordNo);TCity=findViewById(R.id.TCity);TTaxiTicket=findViewById(R.id.TTaxiTicket);
+        TName=findViewById(R.id.TOther2Name);TRecordNo=findViewById(R.id.TOther1Name);TCity=findViewById(R.id.TCity);TTaxiTicket=findViewById(R.id.TTotal);
         TDestination=findViewById(R.id.TDestination);TWType=findViewById(R.id.TWType);TPartner=findViewById(R.id.TPartner);
-        TPlaneTicket=findViewById(R.id.TPlaneTicket);TBoatTicket=findViewById(R.id.TBoatTicket);TTrainTicket=findViewById(R.id.TTrainTicket);
-        TBusTicket=findViewById(R.id.TBusTicket);THotelExpense=findViewById(R.id.THotelExpense);TAllowance=findViewById(R.id.TAllowance);
+        TPlaneTicket=findViewById(R.id.TPlaneTicket);TBoatTicket=findViewById(R.id.TOther1);TTrainTicket=findViewById(R.id.TTrainTicket);
+        TBusTicket=findViewById(R.id.TOther2);THotelExpense=findViewById(R.id.TOther3Name);TAllowance=findViewById(R.id.TOther3);
         TWDate=findViewById(R.id.TWDate);
     }
 }

@@ -112,7 +112,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TName"
+            app:layout_constraintStart_toStartOf="@+id/TOther2Name"
             app:layout_constraintTop_toBottomOf="@+id/TDestination"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -150,7 +150,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TName"
+            app:layout_constraintStart_toStartOf="@+id/TOther2Name"
             app:layout_constraintTop_toBottomOf="@+id/ETypeDate"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -278,12 +278,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TName"
-            app:layout_constraintTop_toBottomOf="@+id/TName"
+            app:layout_constraintStart_toStartOf="@+id/TOther2Name"
+            app:layout_constraintTop_toBottomOf="@+id/TOther2Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TName"
+            android:id="@+id/TOther2Name"
             android:layout_width="168dp"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -298,8 +298,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TRecordNo"
-            app:layout_constraintTop_toBottomOf="@+id/TRecordNo"
+            app:layout_constraintStart_toStartOf="@+id/TOther1Name"
+            app:layout_constraintTop_toBottomOf="@+id/TOther1Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -324,7 +324,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TRecordNo"
+            android:id="@+id/TOther1Name"
             android:layout_width="168dp"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"

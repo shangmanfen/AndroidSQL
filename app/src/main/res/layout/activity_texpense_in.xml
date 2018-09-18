@@ -34,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TRecordNo"
+            app:layout_constraintStart_toStartOf="@+id/TOther1Name"
             app:layout_constraintTop_toBottomOf="@+id/TWType"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -131,7 +131,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/TName"
+            app:layout_constraintStart_toStartOf="@+id/TOther2Name"
             app:layout_constraintTop_toBottomOf="@+id/TCity"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -216,7 +216,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TName"
+            android:id="@+id/TOther2Name"
             android:layout_width="168dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -231,8 +231,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/TRecordNo"
-            app:layout_constraintTop_toBottomOf="@+id/TRecordNo"
+            app:layout_constraintStart_toStartOf="@+id/TOther1Name"
+            app:layout_constraintTop_toBottomOf="@+id/TOther1Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -257,7 +257,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TRecordNo"
+            android:id="@+id/TOther1Name"
             android:layout_width="168dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -316,7 +316,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView17"
-            app:layout_constraintTop_toBottomOf="@+id/TName"
+            app:layout_constraintTop_toBottomOf="@+id/TOther2Name"
             app:layout_constraintVertical_bias="0.0" />
     </android.support.constraint.ConstraintLayout>
 
@@ -333,7 +333,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <EditText
-            android:id="@+id/TTaxiTicket"
+            android:id="@+id/TTotal"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -348,11 +348,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ETypeDate"
-            app:layout_constraintTop_toBottomOf="@+id/THotelExpense"
+            app:layout_constraintTop_toBottomOf="@+id/TOther3Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TAllowance"
+            android:id="@+id/TOther3"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -369,20 +369,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/TBusTicket"
+            app:layout_constraintTop_toBottomOf="@+id/TOther2"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="7dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
             android:text="出差补贴"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -392,7 +394,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/THotelExpense"
+            android:id="@+id/TOther3Name"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -410,7 +412,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TBoatTicket"
+            android:id="@+id/TOther1"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -473,7 +475,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
-            android:id="@+id/TBusTicket"
+            android:id="@+id/TOther2"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -490,7 +492,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/TBoatTicket"
+            app:layout_constraintTop_toBottomOf="@+id/TOther1"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -627,6 +629,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="下一步"
+        android:onClick="next"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

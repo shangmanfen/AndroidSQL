@@ -40,12 +40,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".CompleteRecord1"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_complete_record1"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity
             android:name=".CompleteRecord2"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_complete_record2"
@@ -87,6 +81,12 @@
             android:label="TExpenseIn2"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".CompleteRecord1"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_aaa"
+            android:theme="@style/FullscreenTheme"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

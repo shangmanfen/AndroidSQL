@@ -10,21 +10,15 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.waps.AppConnect;
-import cn.waps.AppListener;
 
 public class StartActivity extends Activity {
     public static StartActivity instance=null;
@@ -150,7 +144,7 @@ public class StartActivity extends Activity {
                         public void run() {
                             if(!account.equals("") & !password.equals("")){
                                 //startActivity(new Intent(StartActivity.this,MainChoose1.class));
-                                startActivity(new Intent(StartActivity.this, TExpenseIn1.class));
+                                startActivity(new Intent(StartActivity.this, TExpenseIn2.class));
                                 StartActivity.this.finish();
                                 mHandler.removeCallbacks(run); }
                             else {

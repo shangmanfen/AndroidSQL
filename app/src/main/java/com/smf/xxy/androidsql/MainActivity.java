@@ -44,11 +44,6 @@ public class MainActivity extends Activity {
         {
             super.onCreate(savedInstanceState);
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 让手机屏幕保持直立模式
-            if(Build.VERSION.SDK_INT >= 21) {
-                //设置状态栏透明
-                getWindow().setStatusBarColor(Color.red(android.R.color.darker_gray));
-            }
-            //this.requestWindowFeature(Window.FEATURE_NO_TITLE);this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
             setContentView(R.layout.activity_main);
             instance2=this;

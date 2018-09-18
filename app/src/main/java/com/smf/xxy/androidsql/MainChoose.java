@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.gesture.GestureOverlayView;
 import android.graphics.Color;
 import android.opengl.Visibility;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -52,15 +53,11 @@ public class MainChoose extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.parseColor("#040814"));
+        }
         setContentView(R.layout.activity_main_choose);
         AppConnect.getInstance(this);
-        //设置迷你广告背景颜色
-        AppConnect.getInstance(this).setAdBackColor(Color.argb(50, 120, 240, 120));
-//设置迷你广告广告诧颜色
-        AppConnect.getInstance(this).setAdForeColor(Color.YELLOW);
-//若未设置以上两个颜色，则默认为黑底白字
-        LinearLayout miniLayout =(LinearLayout)findViewById(R.id.miniAdLinearLayout);
-        AppConnect.getInstance(this).showMiniAd(this, miniLayout, 10); //默认 10 秒切换一次广告
         textView=findViewById(R.id.textView1);
         pref1= PreferenceManager.getDefaultSharedPreferences(this);
         yingdao3=findViewById(R.id.yingdao3);
