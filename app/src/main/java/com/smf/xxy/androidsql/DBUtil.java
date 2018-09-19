@@ -68,8 +68,7 @@ public class DBUtil
         } catch (SQLException e)
         {
             e.printStackTrace();
-            result += "查询数据异常!";
-            //result += "查询数据异常!" + e.getMessage();
+            result = "操作失败";
         }
         return result;
     }

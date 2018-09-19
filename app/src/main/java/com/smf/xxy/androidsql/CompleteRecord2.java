@@ -12,6 +12,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class CompleteRecord2 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
         Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
         int ori = mConfiguration.orientation; //获取屏幕方向
         setContentView(R.layout.activity_complete_record2);
@@ -342,12 +344,13 @@ public class CompleteRecord2 extends Activity {
                     break;
                 case 1004:
                     Init();
+                    editor.putBoolean("GoToTExpense",true).commit();
                     startActivity(new Intent(CompleteRecord2.this,success.class));
                     CompleteRecord2.this.finish();
                     //Toast.makeText(CompleteRecord2.this,"保存成功~",Toast.LENGTH_SHORT).show();
                     break;
                 case 1005:
-                    Init();
+                    Init();editor.putBoolean("GoToTExpense",false).commit();
                     Toast.makeText(CompleteRecord2.this,"该工作记录已经存在",Toast.LENGTH_SHORT).show();
                     break;
             }

@@ -23,7 +23,7 @@ import cn.waps.AppConnect;
 public class StartActivity extends Activity {
     public static StartActivity instance=null;
     private SharedPreferences pref;
-    String version="V180911";
+    String version="V180919";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,8 +143,8 @@ public class StartActivity extends Activity {
                         @Override
                         public void run() {
                             if(!account.equals("") & !password.equals("")){
-                                //startActivity(new Intent(StartActivity.this,MainChoose1.class));
-                                startActivity(new Intent(StartActivity.this, TExpenseIn2.class));
+                                startActivity(new Intent(StartActivity.this,MainChoose1.class));
+                                //startActivity(new Intent(StartActivity.this, TExpenseIn1.class));
                                 StartActivity.this.finish();
                                 mHandler.removeCallbacks(run); }
                             else {

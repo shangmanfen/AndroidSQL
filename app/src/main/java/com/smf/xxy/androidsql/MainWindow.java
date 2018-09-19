@@ -29,6 +29,8 @@ import java.util.Calendar;
 
 import cn.waps.AppConnect;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 public class MainWindow extends Activity {
     public static MainWindow instance3 = null;
     private SharedPreferences pref;
@@ -46,7 +48,7 @@ public class MainWindow extends Activity {
         instance3=this;
         textView=findViewById(R.id.textView1);
         RecordContent=findViewById(R.id.RecordText);
-        pref= PreferenceManager.getDefaultSharedPreferences(this);
+        pref= getDefaultSharedPreferences(this);
         account1=pref.getString("account","");
         String tiexinwenhouyu="";
         Calendar calendar = Calendar.getInstance();
@@ -90,6 +92,8 @@ public class MainWindow extends Activity {
             String date = year + "-" + month1 + "-" + day1;
             String date1 = year + month1 + day1;
             String time = " " + hour + ":" + minute + ":" + second;
+            SharedPreferences.Editor editor1=pref.edit();
+            editor1.putString("WWorkRecordNo",year+month1+day1+"01").commit();
             test(date, time, date1);
         }
     }
@@ -115,7 +119,7 @@ public class MainWindow extends Activity {
                             "'"+RecordContent.getText().toString()+"')";
                     try {
                         String ret = DBUtil.Record(sql);
-                        if(ret.equals("查询数据异常!")){msg.what=1002;}
+                        if(ret.equals("操作失败")){msg.what=1002;}
                         else msg.what=1001;
                         Bundle data = new Bundle();
                         msg.setData(data);
@@ -144,30 +148,29 @@ public class MainWindow extends Activity {
             switch (msg.what)
             {
                 case 1001:
-                    //Toast.makeText(MainWindow.this,"保存成功~",Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor editor=pref.edit();
+                    editor.putBoolean("GoToTExpense",true).commit();
                     startActivity(new Intent(MainWindow.this,success.class));
                     MainWindow.this.finish();
                     break;
 
                 case 1002:
+                    SharedPreferences.Editor editor1=pref.edit();
+                    editor1.putBoolean("GoToTExpense",false).commit();
                     Toast.makeText(MainWindow.this,"今天的工作记录已经保存过啦！",Toast.LENGTH_SHORT).show();
                     //Password.setText("") ;
                     break;
                 case 1003:
                     Toast.makeText(MainWindow.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
                     break;
-                case 1004:
-                    //Toast.makeText(MainActivity.this,"当前是最新版本~",Toast.LENGTH_SHORT).show();
-                    break;
-
-                case 1005:
-                    //Toast.makeText(MainActivity.this,"请更新至最新版本",Toast.LENGTH_SHORT).show();
-                    break;
             }
         };
     };
 
     public void change(View view) {
+        SharedPreferences pref=PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor=pref.edit();
+        editor.putBoolean("GoToTExpense",true).commit();
         startActivity(new Intent(MainWindow.this,CompleteRecord1.class));
         MainWindow.this.finish();
     }

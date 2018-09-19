@@ -43,7 +43,7 @@
             android:name=".CompleteRecord2"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_complete_record2"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".MainChoose"
             android:configChanges="orientation|keyboardHidden|screenSize"

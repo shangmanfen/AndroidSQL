@@ -1,9 +1,12 @@
 package com.smf.xxy.androidsql;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,13 +18,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class TExpenseIn2 extends AppCompatActivity {
-Spinner TIsDone;String a;
+Spinner TIsDone;String a,WorkRecordNo,Name; Button save;SQLiteDatabase db;
 EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTicketNo,TEYear,TEMonth,TRemark;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_texpense_in2);
+        save=findViewById(R.id.save);
         TOther1Name=findViewById(R.id.TOther1Name);
         TOther2Name=findViewById(R.id.TOther2Name);
         TOther3Name=findViewById(R.id.TOther3Name);
@@ -40,18 +44,21 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
                 String[] languages = getResources().getStringArray(R.array.spingarr);
                 a=languages[pos];
                 if(a.equals("是"))
-                    a="YES";
+                    a="Yes";
                 else if(a.equals("否"))
-                    a="NO";
+                    a="No";
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // Another interface callback
             }
         });
-
+        SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
+        Name=pref.getString("account","");
+        WorkRecordNo=pref.getString("WWorkRecordNo","");
+        //WorkRecordNo="2018091401";
+        findc();
     }
-    SQLiteDatabase db;
     private void Insert(){
         db=SQLiteDatabase.openOrCreateDatabase("/data/data/com.smf.xxy.androidsql/HY.db",null);
         try{
@@ -64,34 +71,42 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
                     +"',EYear='"+TEYear.getText().toString()+"',EMonth='"+TEMonth.getText().toString()+"',IsDone='"+a+"',Remark='"+TRemark.getText().toString()
                     +"'";
             db.execSQL(sql);
-            Toast.makeText(TExpenseIn2.this,"成功修改数据。",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(TExpenseIn2.this,"成功修改数据。",Toast.LENGTH_SHORT).show();
         }
         catch (Exception a){
             Toast.makeText(TExpenseIn2.this,"未成功修改数据。",Toast.LENGTH_SHORT).show();
         }
     }
     public void getData(View v){
-        Insert();
-        if(TOther1.getText().toString().equals("")){
-            TOther1Name.setText("");_getData();}
-        else if(TOther1Name.getText().toString().equals(""))
-            Toast.makeText(TExpenseIn2.this,"用途1不能为空！",Toast.LENGTH_SHORT).show();
-        else if(TOther2.getText().toString().equals("")){
-            TOther2Name.setText("");_getData();}
-        else if(TOther2Name.getText().toString().equals(""))
-            Toast.makeText(TExpenseIn2.this,"用途2不能为空！",Toast.LENGTH_SHORT).show();
-        else if(TOther3.getText().toString().equals("")){
-            TOther3Name.setText("");_getData();}
-        else if(TOther3Name.getText().toString().equals(""))
-            Toast.makeText(TExpenseIn2.this,"用途3不能为空！",Toast.LENGTH_SHORT).show();
-        else if(TTotal.getText().toString().equals(""))
-             Toast.makeText(TExpenseIn2.this,"小计不能为空！",Toast.LENGTH_SHORT).show();
-        else if(TTicketNo.getText().toString().equals(""))
-            Toast.makeText(TExpenseIn2.this,"单据张数不能为空！",Toast.LENGTH_SHORT).show();
-        else if(TEYear.getText().toString().equals("")||TEMonth.getText().toString().equals(""))
-            Toast.makeText(TExpenseIn2.this,"请补齐单据日期！",Toast.LENGTH_SHORT).show();
+        if(result[0]==null) {
+            if(result1[1]==null)
+                Toast.makeText(TExpenseIn2.this, "您没有相应的工作记录！", Toast.LENGTH_SHORT).show();
+             else if (!TOther1.getText().toString().equals("")& TOther1Name.getText().toString().equals(""))
+                Toast.makeText(TExpenseIn2.this, "用途1不能为空！", Toast.LENGTH_SHORT).show();
+             else if (!TOther2.getText().toString().equals("")& TOther2Name.getText().toString().equals(""))
+                Toast.makeText(TExpenseIn2.this, "用途2不能为空！", Toast.LENGTH_SHORT).show();
+             else if (!TOther3.getText().toString().equals("")& TOther3Name.getText().toString().equals(""))
+                Toast.makeText(TExpenseIn2.this, "用途3不能为空！", Toast.LENGTH_SHORT).show();
+            else if (TTotal.getText().toString().equals(""))
+                Toast.makeText(TExpenseIn2.this, "小计不能为空！", Toast.LENGTH_SHORT).show();
+            else if (TTicketNo.getText().toString().equals(""))
+                Toast.makeText(TExpenseIn2.this, "单据张数不能为空！", Toast.LENGTH_SHORT).show();
+            else if (TEYear.getText().toString().equals("") || TEMonth.getText().toString().equals(""))
+                Toast.makeText(TExpenseIn2.this, "请补齐单据日期！", Toast.LENGTH_SHORT).show();
+            else if (TOther1.getText().toString().equals("")) {
+                TOther1Name.setText(""); Insert();
+                _getData();
+            }else if (TOther2.getText().toString().equals("")) {
+                TOther2Name.setText("");Insert();
+                _getData();
+            }else if (TOther3.getText().toString().equals("")) {
+                TOther3Name.setText("");Insert();
+                _getData();
+            }else{
+                _getData();Insert();}
+        }
         else
-        _getData();
+            save.setVisibility(View.GONE);
     }
     String sql;
     private void _getData()
@@ -101,7 +116,6 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
         Cursor cursor = db.query ("texpense1",null,null,null,null,null,null);
         try{
             if(cursor.moveToFirst()) {
-                int iii=cursor.getCount();
                 for(int i=0;i<cursor.getCount();i++){
                     //cursor.move(i);
                     //从hy.db把存的东西取出来
@@ -136,16 +150,17 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
                             "," + BusTicket +" ," + TaxiTicket +" ," + HotelExpense +" , " + Allowance +" , '" + Other1Name + "' , " + Other1 +" , '" + Other2Name +
                             "' , " + Other2 +" , '" + Other3Name +"' , " + Other3 +" , " + Total +" , " + TicketNo +", '" +IsDone +"', '" + Remark +
                             "', " + EYear +", " +EMonth +")";
-//                    System.out.println(sql);
                     findb();
                 }
             }
+            else
+                Toast.makeText(TExpenseIn2.this,"未查询到数据",Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             System.out.println(e);
         }
     }
-    Runnable bb,cc;
+    Runnable bb,cc,dd;String result[]={};String result1[]={};
     private void findb()
     {
         bb = new Runnable()
@@ -179,12 +194,83 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
         };
         new Thread(bb).start();
     }
+    private void findc()
+    {
+        cc = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try{
+                    Message msg = new Message();
+                    String shuzu[]={"Name","RecordNo","WDate","City","Destination","WType","Partner","PlaneTicket","TrainTicket","BoatTicket","BusTicket","TaxiTicket","HotelExpense","Allowance","Other1Name","Other1","Other2Name","Other2","Other3Name","Other3","Total","TicketNo", "IsDone", "Remark", "EYear", "EMonth"};
+                    String sql="SELECT RTRIM(Name)Name, RTRIM(RecordNo)RecordNo, RTRIM(WDate)WDate, RTRIM(City)City, RTRIM(Destination)Destination, RTRIM(WType)WType, RTRIM(Partner)Partner, PlaneTicket, TrainTicket, BoatTicket, BusTicket, TaxiTicket, HotelExpense, Allowance, RTRIM(Other1Name)Other1Name, Other1, RTRIM(Other2Name)Other2Name, Other2, RTRIM(Other3Name)Other3Name, Other3, Total, TicketNo, RTRIM(IsDone)IsDone, RTRIM(Remark)Remark, EYear, EMonth FROM TravelExpense where Name = '"+Name+"' and RecordNo = '"+WorkRecordNo+"'";
+                    try {
+                        result=DBUtil.FindLot(sql,shuzu);
+                        if(result[0]==null){msg.what=1004;}
+                        else
+                            msg.what=1005;
+                        mHandler.sendMessage(msg);
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                        msg.what=1003;mHandler.sendMessage(msg);
+                        return;
+                    }
+                }catch (Exception e){
+                    Message msg = new Message();
+                    Bundle data = new Bundle();
+                    data.putString("result", e.getMessage());
+                    msg.setData(data);
+                    mHandler.sendMessage(msg);
+                }
+            }
+        };
+        new Thread(cc).start();
+    }
+    private void findd()
+    {
+        dd = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try{
+                    Message msg = new Message();
+                    String shuzu[]={"ArriveTime","City","Partner"};
+                    String sql="select * from WorkRecord where Name = '"+Name+"'and RecordNo = '"+WorkRecordNo+"'";
+//                    String sql="select RTRIM(ArriveTime)ArriveTime, RTRIM(City)City, RTRIM(Partner)Partner from WorkRecord where Name = '"+Name+"'and RecordNo = '"+WorkRecordNo+"'";
+                    try {
+                        result1=DBUtil.FindLot(sql,shuzu);
+                        if(result1[1]==null){}
+                        else{
+                            msg.what=1006;
+                            mHandler.sendMessage(msg);}
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        msg.what=1003;mHandler.sendMessage(msg);
+                        return;
+                    }
+                }
+                catch (Exception e){
+                    Message msg = new Message();
+                    Bundle data = new Bundle();
+                    data.putString("result", e.getMessage());
+                    msg.setData(data);
+                    mHandler.sendMessage(msg);
+                }
+            }
+        };
+        new Thread(dd).start();
+    }
     Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
             switch (msg.what)
             {
                 case 1001:
-                    Toast.makeText(TExpenseIn2.this,"保存成功！",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(TExpenseIn2.this,"保存成功！",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(TExpenseIn2.this,success.class));
+                    TExpenseIn2.this.finish();
                     mHandler.removeCallbacks(bb);
                     break;
                 case 1002:
@@ -195,9 +281,33 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
                     Toast.makeText(TExpenseIn2.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
                     break;
                 case 1004:
-
+                    findd();
+                    mHandler.removeCallbacks(cc);
                     break;
                 case 1005:
+                    TOther1Name.setText(result[14]);
+                    TOther1.setText(result[15]);
+                    TOther2Name.setText(result[16]);
+                    TOther2.setText(result[17]);
+                    TOther3Name.setText(result[18]);
+                    TOther3.setText(result[19]);
+                    TTotal.setText(result[20]);
+                    TTicketNo.setText(result[21]);
+                    if(result[22].equals("是"))
+                        TIsDone.setSelection(0);
+                    else
+                        TIsDone.setSelection(1);
+                    TRemark.setText(result[23]);
+                    TEYear.setText(result[24]);
+                    TEMonth.setText(result[25]);
+                    save.setVisibility(View.GONE);
+                    findd();
+                    mHandler.removeCallbacks(cc);
+                    break;
+                case 1006:
+                    TEYear.setText(WorkRecordNo.substring(0,4));
+                    TEMonth.setText(WorkRecordNo.substring(4,6));
+                    mHandler.removeCallbacks(dd);
                     break;
             }
         };

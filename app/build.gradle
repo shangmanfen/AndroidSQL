@@ -6,8 +6,8 @@ android {
         applicationId "com.smf.xxy.androidsql"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 4
-        versionName "V180911"
+        versionCode 5
+        versionName "V180919"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -16,6 +16,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    //Add the following configuration
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 

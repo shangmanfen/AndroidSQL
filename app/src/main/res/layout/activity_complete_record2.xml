@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         tools:context=".CompleteRecord2">
     </android.support.constraint.ConstraintLayout>
+
     <EditText
         android:id="@+id/recordText1"
         android:layout_width="300dp"
@@ -21,6 +22,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
+        android:background="@android:drawable/editbox_background"
         android:hint="请输入工作内容"
         android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +63,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:drawable/editbox_background"
         android:hint="请输入备注计划"
         android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,6 +104,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:drawable/editbox_background"
         android:hint="请输入未完事宜"
         android:inputType="text|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -183,6 +187,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:drawable/editbox_background"
         android:hint="请输入工作内容"
         android:inputType="text|textMultiLine|textImeMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -202,6 +207,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:drawable/editbox_background"
         android:editable="false"
         android:hint="请输入工作类型"
         android:onClick="selectIobContent"
@@ -259,7 +265,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:onClick="selectIobContent"
         android:text="选择"
         app:layout_constraintBottom_toBottomOf="parent"

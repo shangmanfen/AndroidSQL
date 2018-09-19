@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -29,10 +30,9 @@ public class TExpenseIn1 extends Activity {
         SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
         Name=pref.getString("account","");
         WorkRecordNo=pref.getString("WWorkRecordNo","");
-        WorkRecordNo="2018091401";
+        //WorkRecordNo="2018091401";
         findid();
         findb();
-
     }
     public void next(View v){
         if (TWDate.getText().toString().equals(""))
@@ -43,8 +43,11 @@ public class TExpenseIn1 extends Activity {
             Toast.makeText(TExpenseIn1.this,"目的地不能为空！",Toast.LENGTH_SHORT).show();
         else if(TWType.getText().toString().equals(""))
             Toast.makeText(TExpenseIn1.this,"事由不能为空！",Toast.LENGTH_SHORT).show();
-        else
+        else{
             Insert();
+            startActivity(new Intent(TExpenseIn1.this, TExpenseIn2.class));
+            TExpenseIn1.this.finish();
+        }
     }
     Runnable bb,cc;String result[]={};
     private void findb()
@@ -204,7 +207,6 @@ public class TExpenseIn1 extends Activity {
     private void Insert(){
         SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase("/data/data/com.smf.xxy.androidsql/HY.db",null);
         try{
-            //String sql="delete from texpense1";db.execSQL(sql);
             String sql="create table IF NOT EXISTS texpense1(" +
                     "name char(10),recordNo char(10),WDate date,City char(15)," +
                     "Destination char(15),WType char(20),Partner char(30)," +
@@ -214,13 +216,15 @@ public class TExpenseIn1 extends Activity {
                     "primary key (name,recordNo)" +
                     ")";
             db.execSQL(sql);
+            sql="delete from texpense1";db.execSQL(sql);
             sql="insert into texpense1 values ('" +Name + "' , '" + WorkRecordNo + "' , '" + TWDate.getText().toString() + "' , '" +
                 TCity.getText().toString() + "' , '" + TDestination.getText().toString() + "' , '" + TWType.getText().toString() + "' , '" +
                 TPartner.getText().toString() + "' , '" + TPlaneTicket.getText().toString() + "' , '" + TTrainTicket.getText().toString() + "' ,' " +
                 TBoatTicket.getText().toString() + "' , '" + TBusTicket.getText().toString() + "' ,'" + TTaxiTicket.getText().toString() +"' , '" +
                 THotelExpense.getText().toString() + "' , '"+ TAllowance.getText().toString() +"' , '0' , 0 , '0' , 0 , '0' ,0 , 0 , 0, '0', '0', 0,0"+
                 ")";
-            db.execSQL(sql);Toast.makeText(TExpenseIn1.this,"成功插入数据。",Toast.LENGTH_SHORT).show();
+            db.execSQL(sql);
+            //Toast.makeText(TExpenseIn1.this,"成功插入数据。",Toast.LENGTH_SHORT).show();
         }
         catch (Exception a){
             Toast.makeText(TExpenseIn1.this,"未成功插入数据。",Toast.LENGTH_SHORT).show();
@@ -247,18 +251,6 @@ public class TExpenseIn1 extends Activity {
                     TTaxiTicket.setText(result[11]);
                     THotelExpense.setText(result[12]);
                     TAllowance.setText(result[13]);
-                    /*TOther1Name.setText(result[14]);
-                    TOther1.setText(result[15]);
-                    TOther2Name.setText(result[16]);
-                    TOther2.setText(result[17]);
-                    TOther3Name.setText(result[18]);
-                    TOther3.setText(result[19]);
-                    TTotal.setText(result[20]);
-                    TTicketNo.setText(result[21]);
-                    TIsDone.setText(result[22]);
-                    TRemark.setText(result[23]);
-                    TEYear.setText(result[24]);
-                    TEMonth.setText(result[25]);*/
                     mHandler.removeCallbacks(bb);
                     break;
                 case 1002:
@@ -278,8 +270,6 @@ public class TExpenseIn1 extends Activity {
                     TCity.setText(result[1]);
                     TPartner.setText(result[2]);
                     TDestination.setText(TCity.getText().toString());
-                    /*TEYear.setText(WorkRecordNo.substring(0,4));
-                    TEMonth.setText(WorkRecordNo.substring(4,6));*/
                     break;
             }
         };
