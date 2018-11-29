@@ -53,7 +53,7 @@ public class CompleteRecord1 extends Activity {
         WLeaveDay1=findViewById(R.id.WLeaveDay);
         WLeaveTime1=findViewById(R.id.WLeaveTime);
         WName1=findViewById(R.id.WName);
-        WName1.setText(MainChoose.account);
+        WName1.setText(WorkRecordChoose.account);
         WExtraTime1=findViewById(R.id.WExtraTime);
         WWorkTime1=findViewById(R.id.WWorkTime);
         WPartner1=findViewById(R.id.WPartner);
@@ -80,7 +80,8 @@ public class CompleteRecord1 extends Activity {
     @Override
     public void onBackPressed() {
         CompleteRecord1.this.finish();
-        MainChoose.introduce.setClickable(true);MainChoose.describe.setClickable(true);
+        WorkRecordChoose.introduce.setClickable(true);
+        WorkRecordChoose.describe.setClickable(true);
     }
     public static boolean IsOut=false;
     public  void protect(View v){
@@ -139,7 +140,8 @@ public class CompleteRecord1 extends Activity {
         chuanzhi();
         startActivity(new Intent(CompleteRecord1.this,CompleteRecord3.class));
         CompleteRecord1.this.finish();
-        MainChoose.introduce.setClickable(true);MainChoose.describe.setClickable(true);
+        WorkRecordChoose.introduce.setClickable(true);
+        WorkRecordChoose.describe.setClickable(true);
     }
     // strTime要转换的string类型的时间，formatType要转换的格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日
     // HH时mm分ss秒，

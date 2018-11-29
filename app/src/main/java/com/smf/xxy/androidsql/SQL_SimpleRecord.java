@@ -1,38 +1,24 @@
 package com.smf.xxy.androidsql;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StatFs;
 import android.preference.PreferenceManager;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Calendar;
-
-import cn.waps.AppConnect;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
-public class MainWindow extends Activity {
-    public static MainWindow instance3 = null;
+public class SQL_SimpleRecord extends Activity {
+    public static SQL_SimpleRecord instance3 = null;
     private SharedPreferences pref;
     TextView textView;
     TextView  RecordContent;
@@ -66,13 +52,13 @@ public class MainWindow extends Activity {
     }
 
     public void BackWay(View view) {
-        MainChoose.describe.setClickable(true);
-        MainChoose.introduce.setClickable(true);
-        MainWindow.this.finish();
+        WorkRecordChoose.describe.setClickable(true);
+        WorkRecordChoose.introduce.setClickable(true);
+        SQL_SimpleRecord.this.finish();
     }
     public void Insert(View view) {
         if (RecordContent.getText().toString().trim().equals("")){
-            Toast.makeText(MainWindow.this,"工作记录不可为空！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(SQL_SimpleRecord.this,"工作记录不可为空！",Toast.LENGTH_SHORT).show();
         }
         else {
             //获取系统的日期
@@ -150,18 +136,18 @@ public class MainWindow extends Activity {
                 case 1001:
                     SharedPreferences.Editor editor=pref.edit();
                     editor.putBoolean("GoToTExpense",true).commit();
-                    startActivity(new Intent(MainWindow.this,success.class));
-                    MainWindow.this.finish();
+                    startActivity(new Intent(SQL_SimpleRecord.this,success.class));
+                    SQL_SimpleRecord.this.finish();
                     break;
 
                 case 1002:
                     SharedPreferences.Editor editor1=pref.edit();
                     editor1.putBoolean("GoToTExpense",false).commit();
-                    Toast.makeText(MainWindow.this,"今天的工作记录已经保存过啦！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SQL_SimpleRecord.this,"今天的工作记录已经保存过啦！",Toast.LENGTH_SHORT).show();
                     //Password.setText("") ;
                     break;
                 case 1003:
-                    Toast.makeText(MainWindow.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SQL_SimpleRecord.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
                     break;
             }
         };
@@ -171,7 +157,7 @@ public class MainWindow extends Activity {
         SharedPreferences pref=PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor=pref.edit();
         editor.putBoolean("GoToTExpense",true).commit();
-        startActivity(new Intent(MainWindow.this,CompleteRecord1.class));
-        MainWindow.this.finish();
+        startActivity(new Intent(SQL_SimpleRecord.this,CompleteRecord1.class));
+        SQL_SimpleRecord.this.finish();
     }
 }

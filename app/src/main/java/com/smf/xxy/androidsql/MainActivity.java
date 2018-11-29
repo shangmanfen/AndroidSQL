@@ -4,9 +4,6 @@ package com.smf.xxy.androidsql;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -14,13 +11,8 @@ import android.os.Message;
 import android.app.Activity;
 
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.text.method.DigitsKeyListener;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 
 import android.widget.TextView;
@@ -45,7 +37,7 @@ public class MainActivity extends Activity {
             super.onCreate(savedInstanceState);
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 让手机屏幕保持直立模式
             requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_login);
             instance2=this;
             btnTest=findViewById(R.id.btnTestSql);
             btnClean=findViewById(R.id.btnClean);
@@ -132,7 +124,6 @@ public class MainActivity extends Activity {
                             return;
                         }
 
-
                     }
                     catch (Exception e){
                         Message msg = new Message();
@@ -156,7 +147,7 @@ public class MainActivity extends Activity {
                         editor.putString("account",userName.getText().toString());
                         editor.putString("password",Password.getText().toString());
                         editor.commit();
-                        startActivity(new Intent(MainActivity.this,MainChoose1.class));
+                        startActivity(new Intent(MainActivity.this,MainChoose.class));
                         MainActivity.this.finish();
                         break;
 

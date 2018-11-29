@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/t"
-    tools:context=".MainWindow">
+    tools:context=".SQL_SimpleRecord">
 
 
     <Button

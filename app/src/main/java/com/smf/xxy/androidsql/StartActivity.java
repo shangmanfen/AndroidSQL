@@ -115,7 +115,7 @@ public class StartActivity extends Activity {
                     @Override
                     public void run() {
                         if(!account.equals("") & !password.equals("")){
-                            startActivity(new Intent(StartActivity.this,MainChoose1.class));
+                            startActivity(new Intent(StartActivity.this,MainChoose.class));
                             StartActivity.this.finish();}
                         else {
                             startActivity(new Intent(StartActivity.this, MainActivity.class));
@@ -143,7 +143,7 @@ public class StartActivity extends Activity {
                         @Override
                         public void run() {
                             if(!account.equals("") & !password.equals("")){
-                                startActivity(new Intent(StartActivity.this,MainChoose1.class));
+                                startActivity(new Intent(StartActivity.this,MainChoose.class));
                                 //startActivity(new Intent(StartActivity.this, TExpenseIn1.class));
                                 StartActivity.this.finish();
                                 mHandler.removeCallbacks(run); }
