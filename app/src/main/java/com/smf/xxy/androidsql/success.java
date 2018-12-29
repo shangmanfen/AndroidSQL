@@ -48,16 +48,16 @@ public class success extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(success.this,MainChoose.class));
+                //startActivity(new Intent(success.this,Choose_Main.class));
                 success.this.finish();FlagEmpty();
             }
         });
     }
-private  void  GoToTExpense(){
-    Boolean GoToTExpense=pref.getBoolean("GoToTExpense",false);
-    if(GoToTExpense)
-        remindTExpenseIn();
-}
+    private void GoToTExpense(){
+        Boolean GoToTExpense=pref.getBoolean("GoToTExpense",false);
+        if(GoToTExpense)
+            remindTExpenseIn();
+    }
     private void remindTExpenseIn(){
         AlertDialog.Builder builder = new AlertDialog.Builder(success.this);
         builder.setIcon(R.drawable.logo);
@@ -77,7 +77,7 @@ private  void  GoToTExpense(){
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-
+                editor.putString("RecordNo","").commit();
             }
         });
         //    显示出该对话框
@@ -88,7 +88,7 @@ private  void  GoToTExpense(){
     }
     @Override
     public void onBackPressed() {
-        //startActivity(new Intent(success.this,MainChoose.class));
+        //startActivity(new Intent(success.this,Choose_Main.class));
         success.this.finish();FlagEmpty();
     }
 }

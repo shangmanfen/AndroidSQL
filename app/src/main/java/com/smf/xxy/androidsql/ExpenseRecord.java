@@ -324,7 +324,7 @@ public class ExpenseRecord extends Activity {
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ExpenseRecord.this,MainChoose.class));
+        startActivity(new Intent(ExpenseRecord.this,Choose_Main.class));
         ExpenseRecord.this.finish();
     }
 }

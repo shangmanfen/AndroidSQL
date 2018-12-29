@@ -54,9 +54,8 @@ public class DBUtil
         }
         return result;
     }
-    public static String Record(String sql)
+    public static boolean Record(String sql)
     {
-        String result = "";
         try
         {
             Connection conn = getSQLConnection("43.243.128.36", "health", "13240670", "health");
@@ -65,12 +64,12 @@ public class DBUtil
 
             stmt.close();
             conn.close();
+            return true;
         } catch (SQLException e)
         {
             e.printStackTrace();
-            result = "操作失败";
+            return false;
         }
-        return result;
     }
     public static String[] FindLot(String sql,String name[])
     {

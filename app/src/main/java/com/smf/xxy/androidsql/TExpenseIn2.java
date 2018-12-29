@@ -55,7 +55,7 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
         });
         SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
         Name=pref.getString("account","");
-        WorkRecordNo=pref.getString("WWorkRecordNo","");
+        WorkRecordNo=pref.getString("RecordNo","");
         //WorkRecordNo="2018091401";
         findc();
     }
@@ -171,8 +171,8 @@ EditText TOther1Name,TOther2Name,TOther3Name,TOther1,TOther2,TOther3,TTotal,TTic
                 try{
                     Message msg = new Message();
                     try {
-                        String a=DBUtil.Record(sql);
-                        if(a.equals("")){msg.what=1001;}
+                        boolean a=DBUtil.Record(sql);
+                        if(a){msg.what=1001;}
                         else
                             msg.what=1002;
                         mHandler.sendMessage(msg);

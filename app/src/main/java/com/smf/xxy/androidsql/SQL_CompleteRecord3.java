@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,7 +23,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class CompleteRecord2 extends Activity {
+public class SQL_CompleteRecord3 extends Activity {
     TextView WJobContent;
     TextView WUncompleted;
     TextView RecordText,recordText1;
@@ -45,10 +47,10 @@ public class CompleteRecord2 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏显示
         Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
         int ori = mConfiguration.orientation; //获取屏幕方向
-        setContentView(R.layout.activity_complete_record2);
+        setContentView(R.layout.activity_complete_record3);
         record=findViewById(R.id.Record2);
         if (ori == mConfiguration.ORIENTATION_LANDSCAPE) {
 //横屏
@@ -104,11 +106,11 @@ public class CompleteRecord2 extends Activity {
         showMultiDialog();
     }
     public void last(View v){
-        startActivity(new Intent(CompleteRecord2.this,CompleteRecord3.class));
-        CompleteRecord2.this.finish();
+        startActivity(new Intent(SQL_CompleteRecord3.this,SQL_CompleteRecord2.class));
+        SQL_CompleteRecord3.this.finish();
     }
     private void showMultiDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(CompleteRecord2.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SQL_CompleteRecord3.this);
         builder.setTitle("工作类型：");
         final String[] hobbies = {"其它","会议", "培训", "交通","休假"};
         /**
@@ -188,21 +190,35 @@ public class CompleteRecord2 extends Activity {
         else if(recordText1.getText().toString().trim().equals(""))
             RecordContent=RecordText.getText().toString();
         if(RecordContent.equals(""))
-            Toast.makeText(CompleteRecord2.this,"请填写工作记录！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(SQL_CompleteRecord3.this,"请填写工作记录！",Toast.LENGTH_SHORT).show();
         else if(WJobContent.getText().toString().trim().equals(""))
-            Toast.makeText(CompleteRecord2.this,"请填写工作类型！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(SQL_CompleteRecord3.this,"请填写工作类型！",Toast.LENGTH_SHORT).show();
         else {
             JudgeRecordIsExist();
             //JudgeInsertRecord();
         }
-}
+    }
+    private boolean Insert(){
+        SQLiteDatabase db;
+        db= SQLiteDatabase.openOrCreateDatabase("/data/data/com.smf.xxy.androidsql/HY.db",null);
+        try{
+            String sql="update WorkRecord set JobContent='"+WJobContent.getText().toString()+"',Solveway='"+RecordContent+
+                    "',Uncompleted='"+WUncompleted.getText().toString()+"',Remark='"+WRemark.getText().toString()+"'";
+            db.execSQL(sql);
+            return true;
+            //Toast.makeText(TExpenseIn2.this,"成功修改数据。",Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception a){
+            return false;
+        }
+    }
     private void Init(){
         editor.putString("WorkTime","时:分");
         editor.putString("ExtraTime","时:分");
         editor.putString("TrafficTime","时:分");
         editor.putString("Arrive","");
         editor.putString("Out","");
-        CompleteRecord1.IsOut=false;
+        SQL_CompleteRecord1.IsOut=false;
         editor.putString("OutTime","");
         editor.putString("ArriveTime","");
         editor.putString("LeaveTime","");
@@ -246,27 +262,80 @@ public class CompleteRecord2 extends Activity {
                         else msg.what=1002;
                         Bundle data = new Bundle();
                         msg.setData(data);
-                        Handler111.sendMessage(msg);
+                        mHandler.sendMessage(msg);
                     }
                     catch(Exception e){
-                        msg.what=1003;Handler111.sendMessage(msg);
+                        msg.what=1003;mHandler.sendMessage(msg);
                         return;
                     }
-
                 }
                 catch (Exception e){
                     Message msg = new Message();
-                    Bundle data = new Bundle();
-                    data.putString("result", e.getMessage());
-                    msg.setData(data);
-                    Handler111.sendMessage(msg);
+                    msg.what=1003;
+                    mHandler.sendMessage(msg);
                 }
-                finally { }
             }
         };
         new Thread(run).start();
     }
-    private void JudgeInsertRecord()
+
+    String RecordNo;
+    private void _getData()
+    {
+        SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase("/data/data/com.smf.xxy.androidsql/HY.db",null);
+        //查询获得游标
+        Cursor cursor = db.query ("WorkRecord",null,null,null,null,null,null);
+        try{
+            if(cursor.moveToFirst()) {
+                for(int i=0;i<cursor.getCount();i++){
+                    //cursor.move(i);
+                    //从hy.db把存的东西取出来
+                    String Name=cursor.getString(0);
+                    RecordNo=cursor.getString(1);
+                    String OutTime=cursor.getString(2);
+                    String ArriveTime=cursor.getString(3);
+                    String LeaveTime=cursor.getString(4);
+                    String WorkTime=cursor.getString(5);
+                    String ExtraTime=cursor.getString(6);
+                    String TrafficTime=cursor.getString(7);
+                    String City=cursor.getString(8);
+                    String CShortName=cursor.getString(9);
+                    String Contector=cursor.getString(10);
+                    String JobContent=cursor.getString(11);
+                    String Uncompleted=cursor.getString(12);
+                    String Remark=cursor.getString(13);
+                    String ReportNo=cursor.getString(14);
+                    String Solveway=cursor.getString(15);
+                    String TypeDate=cursor.getString(16);
+                    String LeaderRemark=cursor.getString(17);
+                    String IsLeaderScore=cursor.getString(18);
+                    String LeaderScoreDate=cursor.getString(19);
+                    String Partner=cursor.getString(20);
+                    String Abandoner=cursor.getString(21);
+                    String AbandonDate=cursor.getString(22);
+                    String Out=cursor.getString(23);
+                    int OutKm=cursor.getInt(24);
+                    String Arrive=cursor.getString(25);
+                    int ArriveKm=cursor.getInt(26);
+                    String Actual=cursor.getString(27);
+                    String RRemark=cursor.getString(28);
+                    String Allowance=cursor.getString(29);
+                    String sql="insert into WorkRecord values ('"+Name+"','"+RecordNo+"','"+OutTime+"','"+ArriveTime+"','"+LeaveTime+"','"+WorkTime+"','"+ExtraTime+
+                            "','"+TrafficTime+"','"+City+"','"+CShortName+"','"+Contector+"','"+JobContent+"','"+Uncompleted+"','"+Remark+"','"+
+                            ReportNo+"','"+Solveway+"','"+TypeDate+"','"+LeaderRemark+"','"+IsLeaderScore+"','"+LeaderScoreDate+"','"+Partner+
+                            "','"+Abandoner+"','"+AbandonDate+"','"+Out+"','"+OutKm+"','"+Arrive+"','"+ArriveKm+"','"+Actual+"','"+RRemark+"','"+Allowance+ "')";
+                    InsertRecord(sql);
+                }
+            }
+            else
+                Toast.makeText(this,"未查询到数据",Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    private void InsertRecord(final String sql)
     {
         Runnable run = new Runnable()
         {
@@ -276,29 +345,11 @@ public class CompleteRecord2 extends Activity {
                 if(NoRecord){
                     try{
                         Message msg = new Message();
-                        chooseTime();
-                        String TypeDate = year + "-" +(month+1)+"-" +day;
-                    String sql = "insert into WorkRecord values ('"+
-                            Name+"','"+ WWorkRecordNo+"','"+ OutTime+"','"+ArriveTime+"','"+LeaveTime+"','"+
-                            WorkTime+"','"+ExtraTime+"','"+TrafficTime+"','"+City+ "','','','"+
-                            WJobContent.getText().toString()+"','"+WUncompleted.getText().toString()+"','"+
-                            WRemark.getText().toString()+ "','无','" +RecordContent+
-                            "','"+TypeDate+"','','否','1900-01-01','"+WPartner+"','','1900-01-01','"+
-                            Out+"','"+CompleteRecord3.OutKm+"','"+Arrive+"','"+CompleteRecord3.ArriveKm+"','"+
-                            CompleteRecord3.Actual+
-                            "','"+CompleteRecord3.RRemark+"','"+Contector+"')";
-                        try {
-                            String ret = DBUtil.Record(sql);
+                        if(DBUtil.Record(sql))
                             msg.what=1004;
-                            Bundle data = new Bundle();
-                            msg.setData(data);
-                            mHandler.sendMessage(msg);
-                        }
-                        catch(Exception e){
-                            msg.what=1003;mHandler.sendMessage(msg);
-                            return;
-                        }
-
+                        else
+                            msg.what=1006;
+                        mHandler.sendMessage(msg);
                     }
                     catch (Exception e){
                         Message msg = new Message();
@@ -317,41 +368,37 @@ public class CompleteRecord2 extends Activity {
         };
         new Thread(run).start();
     }
-    Handler Handler111 = new Handler(){
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what)
-            {
-                case 1001:
-                    NoRecord=true;
-                    JudgeInsertRecord();
-                    break;
-                case 1002:
-                    NoRecord=false;
-                    JudgeInsertRecord();
-                    break;
-                case 1003:
-                    Toast.makeText(CompleteRecord2.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        };
-    };
+
     Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
             switch (msg.what)
             {
+                case 1001:
+                    if(Insert()) {
+                        //Toast.makeText(SQL_CompleteRecord3.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        _getData();
+                    }else
+                        Toast.makeText(SQL_CompleteRecord3.this,"修改数据失败",Toast.LENGTH_SHORT).show();
+                    break;
+                case 1002:
+                    Toast.makeText(SQL_CompleteRecord3.this,"该工作记录编号已存在！",Toast.LENGTH_SHORT).show();
+                    break;
                 case 1003:
-                    Toast.makeText(CompleteRecord2.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SQL_CompleteRecord3.this,"网络连接失败！",Toast.LENGTH_SHORT).show();
                     break;
                 case 1004:
+                    editor.putBoolean("GoToTExpense",true).commit();//差旅费记号
+                    editor.putString("RecordNo",RecordNo).commit();//记住编号，为填差旅费做准备
                     Init();
-                    editor.putBoolean("GoToTExpense",true).commit();
-                    startActivity(new Intent(CompleteRecord2.this,success.class));
-                    CompleteRecord2.this.finish();
-                    //Toast.makeText(CompleteRecord2.this,"保存成功~",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SQL_CompleteRecord3.this,success.class));//跳转到成功界面
+                    SQL_CompleteRecord3.this.finish();
                     break;
                 case 1005:
                     Init();editor.putBoolean("GoToTExpense",false).commit();
-                    Toast.makeText(CompleteRecord2.this,"该工作记录已经存在",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SQL_CompleteRecord3.this,"该工作记录已经存在",Toast.LENGTH_SHORT).show();
+                    break;
+                case 1006:
+                    Toast.makeText(SQL_CompleteRecord3.this,"新增失败",Toast.LENGTH_SHORT).show();
                     break;
             }
         };

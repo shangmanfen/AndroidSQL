@@ -52,8 +52,8 @@ public class SQL_SimpleRecord extends Activity {
     }
 
     public void BackWay(View view) {
-        WorkRecordChoose.describe.setClickable(true);
-        WorkRecordChoose.introduce.setClickable(true);
+        Choose_WorkRecord.describe.setClickable(true);
+        Choose_WorkRecord.introduce.setClickable(true);
         SQL_SimpleRecord.this.finish();
     }
     public void Insert(View view) {
@@ -79,7 +79,7 @@ public class SQL_SimpleRecord extends Activity {
             String date1 = year + month1 + day1;
             String time = " " + hour + ":" + minute + ":" + second;
             SharedPreferences.Editor editor1=pref.edit();
-            editor1.putString("WWorkRecordNo",year+month1+day1+"01").commit();
+            editor1.putString("RecordNo",year+month1+day1+"01").commit();
             test(date, time, date1);
         }
     }
@@ -104,8 +104,8 @@ public class SQL_SimpleRecord extends Activity {
                             "'','否','1900-01-01','','','1900-01-01','',0,'',0,0,'',0," +
                             "'"+RecordContent.getText().toString()+"')";
                     try {
-                        String ret = DBUtil.Record(sql);
-                        if(ret.equals("操作失败")){msg.what=1002;}
+                        boolean ret = DBUtil.Record(sql);
+                        if(!ret){msg.what=1002;}
                         else msg.what=1001;
                         Bundle data = new Bundle();
                         msg.setData(data);
@@ -157,7 +157,7 @@ public class SQL_SimpleRecord extends Activity {
         SharedPreferences pref=PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor=pref.edit();
         editor.putBoolean("GoToTExpense",true).commit();
-        startActivity(new Intent(SQL_SimpleRecord.this,CompleteRecord1.class));
+        startActivity(new Intent(SQL_SimpleRecord.this,SQL_CompleteRecord1.class));
         SQL_SimpleRecord.this.finish();
     }
 }

@@ -22,7 +22,7 @@ import java.util.Calendar;
 
 import cn.waps.AppConnect;
 
-public class WorkRecordChoose extends Activity {
+public class Choose_WorkRecord extends Activity {
     ImageView buttonbg,textbg;
     public static ImageView describe,introduce;
     private SharedPreferences pref1;
@@ -170,8 +170,8 @@ public class WorkRecordChoose extends Activity {
         if(event.getAction() == MotionEvent.ACTION_UP) {
             //当手指离开的时候
             x2 = event.getX();
-            y2 = event.getY();/*if(y1 - y2 > 50) {Toast.makeText(WorkRecordChoose.this, "向上滑", Toast.LENGTH_SHORT).show();} else if(y2 - y1 > 50) {Toast.makeText(WorkRecordChoose.this, "向下滑", Toast.LENGTH_SHORT).show();}*/
-            if(x1 - x2 > 50) {//Toast.makeText(WorkRecordChoose.this, "向左滑", Toast.LENGTH_SHORT).show();
+            y2 = event.getY();/*if(y1 - y2 > 50) {Toast.makeText(Choose_WorkRecord.this, "向上滑", Toast.LENGTH_SHORT).show();} else if(y2 - y1 > 50) {Toast.makeText(Choose_WorkRecord.this, "向下滑", Toast.LENGTH_SHORT).show();}*/
+            if(x1 - x2 > 50) {//Toast.makeText(Choose_WorkRecord.this, "向左滑", Toast.LENGTH_SHORT).show();
                 PropertyValuesHolder alpha1 = PropertyValuesHolder.ofFloat("alpha",1f);
                 PropertyValuesHolder translationX1 = PropertyValuesHolder.ofFloat("translationX",20f,0f);
                 ObjectAnimator objectAnimator1 = ObjectAnimator.ofPropertyValuesHolder(textbg,translationX1, alpha1);
@@ -192,7 +192,7 @@ public class WorkRecordChoose extends Activity {
                     bbb="complete";
                     aaa++;
                 }
-            } else if(x2 - x1 > 50) {//Toast.makeText(WorkRecordChoose.this, "向右滑", Toast.LENGTH_SHORT).show();
+            } else if(x2 - x1 > 50) {//Toast.makeText(Choose_WorkRecord.this, "向右滑", Toast.LENGTH_SHORT).show();
                 if(yingdao3.getVisibility()==View.VISIBLE){
                     yingdao3.setVisibility(View.GONE);
                 }
@@ -252,19 +252,20 @@ public class WorkRecordChoose extends Activity {
     public void BtnClick(View view){
         //返回
         if(view==findViewById(R.id.Home)){
-            startActivity(new Intent(WorkRecordChoose.this,MainChoose.class));
+            startActivity(new Intent(Choose_WorkRecord.this,Choose_Main.class));
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            WorkRecordChoose.this.finish();
+            Choose_WorkRecord.this.finish();
         }
         //选择前往完整版或者贴心版
         else if(view==findViewById(R.id.describe)||view==findViewById(R.id.introduce)){
             introduce.setClickable(false);describe.setClickable(false);
             if(bbb.equals("simple"))
                 //前往贴心版
-                startActivity(new Intent(WorkRecordChoose.this,SQL_SimpleRecord.class));
+                startActivity(new Intent(Choose_WorkRecord.this,SQL_SimpleRecord.class));
             else
                 //前往完整版
-                startActivity(new Intent(WorkRecordChoose.this,CompleteRecord1.class));
+                startActivity(new Intent(Choose_WorkRecord.this,SQL_CompleteRecord1.class));
+            introduce.setClickable(true);describe.setClickable(true);
         }
 
     }
@@ -272,10 +273,10 @@ public class WorkRecordChoose extends Activity {
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis()-firstTime>2000){
-            Toast.makeText(WorkRecordChoose.this,"再次点击返回退出",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Choose_WorkRecord.this,"再次点击返回退出",Toast.LENGTH_SHORT).show();
             firstTime=System.currentTimeMillis();
         }else{
-            WorkRecordChoose.this.finish();
+            Choose_WorkRecord.this.finish();
             AppConnect.getInstance(this).close();
             System.exit(0);
         }

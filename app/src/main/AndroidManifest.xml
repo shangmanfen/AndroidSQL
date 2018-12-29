@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
 
     <meta-data
         android:name="APP_ID"
@@ -40,12 +43,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".CompleteRecord2"
+            android:name=".SQL_CompleteRecord3"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_complete_record2"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".WorkRecordChoose"
+            android:name=".Choose_WorkRecord"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_main_choose"
             android:screenOrientation="portrait"
@@ -54,12 +57,12 @@
             android:name=".success"
             android:label="@string/title_activity_success" />
         <activity
-            android:name=".CompleteRecord3"
+            android:name=".SQL_CompleteRecord2"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_complete_record3"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".MainChoose"
+            android:name=".Choose_Main"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_main_choose1"
             android:theme="@style/FullscreenTheme" />
@@ -82,11 +85,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".CompleteRecord1"
+            android:name=".SQL_CompleteRecord1"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_aaa"
             android:theme="@style/FullscreenTheme"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

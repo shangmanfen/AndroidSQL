@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/starbg"
-    tools:context=".MainChoose">
+    tools:context=".Choose_Main">
     <ImageButton
         android:id="@+id/Home"
         android:layout_width="150dp"

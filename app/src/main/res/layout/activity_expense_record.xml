@@ -220,6 +220,7 @@
             android:hint="月份"
             android:inputType="number"
             android:textColor="@android:color/black"
+            android:nextFocusDown="@id/TDestination"
             app:layout_constraintBottom_toBottomOf="@+id/EEYear"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -280,7 +281,10 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/TOther2Name"
             app:layout_constraintTop_toBottomOf="@+id/TOther2Name"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            android:nextFocusDown="@id/EEMonth">
+            <requestFocus />
+        </EditText>
 
         <EditText
             android:id="@+id/TOther2Name"

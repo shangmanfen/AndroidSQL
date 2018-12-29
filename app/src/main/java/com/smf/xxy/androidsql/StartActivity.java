@@ -2,6 +2,10 @@ package com.smf.xxy.androidsql;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,7 +27,13 @@ import cn.waps.AppConnect;
 public class StartActivity extends Activity {
     public static StartActivity instance=null;
     private SharedPreferences pref;
-    String version="V180919";
+    String version="V181229";
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +47,29 @@ public class StartActivity extends Activity {
         AppConnect.getInstance(this).showBannerAd(this, adlayout);
         instance=this;
         findVersion();
+        manager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        //showNotification();
     }
+    private NotificationManager manager;
+    private int Notification_ID;
+    private void showNotification() {
+        // TODO Auto-generated method stub
+        Notification.Builder builder=new Notification.Builder(this);
+        builder.setSmallIcon(R.drawable.logo);//设置图标
+        builder.setTicker("通知来啦");//手机状态栏的提示
+        builder.setContentTitle("我是通知标题");//设置标题
+        builder.setContentText("我是通知内容");//设置通知内容
+        builder.setWhen(System.currentTimeMillis());//设置通知时间
+        Intent intent=new Intent(this,MainActivity.class);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this, 0, intent, 0);
+        builder.setContentIntent(pendingIntent);//点击后的意图
+        builder.setDefaults(Notification.DEFAULT_LIGHTS);//设置指示灯
+        builder.setDefaults(Notification.DEFAULT_SOUND);//设置提示声音
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);//设置震动
+        Notification notification=builder.build();//4.1以上，以下要用getNotification()
+        manager.notify(Notification_ID, notification);
+    }
+
     String VersionDetail;
     Runnable run;
     private void findVersion()
@@ -115,7 +147,7 @@ public class StartActivity extends Activity {
                     @Override
                     public void run() {
                         if(!account.equals("") & !password.equals("")){
-                            startActivity(new Intent(StartActivity.this,MainChoose.class));
+                            startActivity(new Intent(StartActivity.this,Choose_Main.class));
                             StartActivity.this.finish();}
                         else {
                             startActivity(new Intent(StartActivity.this, MainActivity.class));
@@ -143,7 +175,7 @@ public class StartActivity extends Activity {
                         @Override
                         public void run() {
                             if(!account.equals("") & !password.equals("")){
-                                startActivity(new Intent(StartActivity.this,MainChoose.class));
+                                startActivity(new Intent(StartActivity.this,Choose_Main.class));
                                 //startActivity(new Intent(StartActivity.this, TExpenseIn1.class));
                                 StartActivity.this.finish();
                                 mHandler.removeCallbacks(run); }
@@ -153,7 +185,7 @@ public class StartActivity extends Activity {
                                 mHandler.removeCallbacks(run);
                             }
                         }
-                    };timer.schedule(timerTask,2000);
+                    };timer.schedule(timerTask,1000);
                     break;
                 case 1005:
                     //Toast.makeText(StartActivity.this,"请更新至最新版本",Toast.LENGTH_LONG).show();

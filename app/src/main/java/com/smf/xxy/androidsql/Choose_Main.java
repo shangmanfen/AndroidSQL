@@ -22,14 +22,14 @@ import java.util.Calendar;
 
 import cn.waps.AppConnect;
 
-public class MainChoose extends Activity {
+public class Choose_Main extends Activity {
     ImageButton work,other;    //手指按下的点为(x1, y1)手指离开屏幕的点为(x2, y2)
     float x1 = 0, x2 = 0,y1 = 0,y2 = 0;
     ConstraintLayout yingdao3;ImageView yingdao,yingdao2;
     public void reLogin(View v){
         editor.remove("count").commit();
-        startActivity(new Intent(MainChoose.this,MainActivity.class));
-        MainChoose.this.finish();
+        startActivity(new Intent(Choose_Main.this,MainActivity.class));
+        Choose_Main.this.finish();
     }
     public void Work(View v){
         editor.putInt("count",count).commit();
@@ -38,9 +38,9 @@ public class MainChoose extends Activity {
         PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.1f,1f);
         //可以直接执行,不过不能拼接动画，这是组合动画
         ObjectAnimator.ofPropertyValuesHolder(work, alpha1, scaleX1, scaleY).setDuration(400).start();
-        startActivity(new Intent(MainChoose.this,WorkRecordChoose.class));
+        startActivity(new Intent(Choose_Main.this,Choose_WorkRecord.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        MainChoose.this.finish();
+        Choose_Main.this.finish();
     }
     public void MoneyMange(View v){
         editor.putInt("count",count).commit();
@@ -49,9 +49,9 @@ public class MainChoose extends Activity {
         PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.1f,1f);
         //可以直接执行,不过不能拼接动画，这是组合动画
         ObjectAnimator.ofPropertyValuesHolder(expense, alpha1, scaleX1, scaleY).setDuration(400).start();
-        startActivity(new Intent(MainChoose.this,ExpenseRecord.class));
+        startActivity(new Intent(Choose_Main.this,ExpenseRecord.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        MainChoose.this.finish();
+        //Choose_Main.this.finish();
     }
     public void Search(View v){
         editor.putInt("count",count).commit();
@@ -60,10 +60,10 @@ public class MainChoose extends Activity {
         PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.1f,1f);
         //可以直接执行,不过不能拼接动画，这是组合动画
         ObjectAnimator.ofPropertyValuesHolder(other, alpha1, scaleX1, scaleY).setDuration(400).start();
-        Toast.makeText(MainChoose.this,"正在开发，敬请期待",Toast.LENGTH_SHORT).show();
-        /*startActivity(new Intent(MainChoose.this,WorkRecordChoose.class));
+        Toast.makeText(Choose_Main.this,"正在开发，敬请期待",Toast.LENGTH_SHORT).show();
+        /*startActivity(new Intent(Choose_Main.this,Choose_WorkRecord.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        MainChoose.this.finish();*/
+        Choose_Main.this.finish();*/
     }
     private int count=0;private SharedPreferences.Editor editor;
     @Override
@@ -293,11 +293,11 @@ public class MainChoose extends Activity {
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis()-firstTime>2000){
-            Toast.makeText(MainChoose.this,"再次点击返回退出",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Choose_Main.this,"再次点击返回退出",Toast.LENGTH_SHORT).show();
             firstTime=System.currentTimeMillis();
         }else{
             editor.remove("count").commit();
-            MainChoose.this.finish();
+            Choose_Main.this.finish();
             AppConnect.getInstance(this).close();
             System.exit(0);
         }

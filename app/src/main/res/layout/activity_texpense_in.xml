@@ -9,10 +9,14 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="272dp"
+        android:layout_width="0dp"
+        android:layout_height="324dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/background_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +31,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
             android:background="@android:drawable/editbox_background"
             android:hint="同去人员"
             android:inputType="text"
@@ -45,17 +50,20 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="104dp"
             android:layout_marginRight="104dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:background="@android:drawable/editbox_background"
             android:hint="城市"
             android:inputType="text"
+            android:nextFocusDown="@id/TDestination"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/TWDate"
             app:layout_constraintTop_toBottomOf="@+id/TWDate"
-            app:layout_constraintVertical_bias="0.00999999" />
+            app:layout_constraintVertical_bias="0.00999999" >
+            <requestFocus/>
+        </EditText>
 
         <TextView
             android:id="@+id/textView31"
@@ -63,10 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="同去人员："
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -74,8 +80,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView30"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toTopOf="@+id/TPartner"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
@@ -85,8 +91,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="选择"
             android:onClick="showMultiDialog"
+            android:text="选择"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -112,7 +118,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETypeDate"
+            app:layout_constraintTop_toTopOf="@+id/TWType"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -120,18 +126,18 @@
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="104dp"
-            android:layout_marginRight="104dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
             android:background="@android:drawable/editbox_background"
             android:hint="点击选择填写"
             android:inputType="none"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/TOther2Name"
-            app:layout_constraintTop_toBottomOf="@+id/TCity"
+            app:layout_constraintTop_toBottomOf="@+id/TDestination"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -140,19 +146,19 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:background="@android:drawable/editbox_background"
             android:hint="目的地"
             android:inputType="text"
             android:text="市内"
+            android:nextFocusDown="@id/TPartner"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toEndOf="@+id/TWDate"
-            app:layout_constraintTop_toBottomOf="@+id/textView28"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/TCity"
+            app:layout_constraintTop_toBottomOf="@+id/TCity"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -161,9 +167,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="目的地："
             android:textColor="@android:color/white"
@@ -172,8 +178,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TWDate"
-            app:layout_constraintTop_toTopOf="@+id/TWDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TDestination"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -183,7 +189,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="城市："
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -192,7 +198,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView17"
-            app:layout_constraintTop_toBottomOf="@+id/textView17"
+            app:layout_constraintTop_toTopOf="@+id/TCity"
             app:layout_constraintVertical_bias="0.00999999" />
 
         <TextView
@@ -202,7 +208,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="日期："
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -211,7 +217,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/TWDate"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -243,7 +249,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="记录编号："
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -252,7 +258,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TOther1Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -265,9 +271,11 @@
             android:layout_marginRight="104dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            android:enabled="false"
             android:background="@android:drawable/editbox_background"
             android:editable="false"
             android:hint="记录编号"
+            android:nextFocusDown="@id/TCity"
             android:inputType="textVisiblePassword"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -275,7 +283,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.019" />
+            app:layout_constraintVertical_bias="0.019"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -286,7 +294,7 @@
             android:layout_marginLeft="36dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="姓名："
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -295,7 +303,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintTop_toTopOf="@+id/TOther2Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
@@ -304,35 +312,33 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="2dp"
-            android:text="选择日期"
+            android:layout_marginTop="4dp"
             android:onClick="TWDate"
+            android:text="选择日期"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView17"
+            app:layout_constraintStart_toStartOf="@+id/TOther2Name"
             app:layout_constraintTop_toBottomOf="@+id/TOther2Name"
             app:layout_constraintVertical_bias="0.0" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="182dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="0dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/background_shape"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout1"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout1"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout1"
         app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/TTotal"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="104dp"
@@ -351,22 +357,21 @@
 
         <EditText
             android:id="@+id/TOther3"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:background="@android:drawable/editbox_background"
             android:editable="false"
             android:inputType="number"
             android:textColor="@android:color/black"
+            android:nextFocusDown="@id/TTotal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView24"
+            app:layout_constraintStart_toStartOf="@+id/TOther2"
             app:layout_constraintTop_toBottomOf="@+id/TOther2"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -376,24 +381,24 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="出差补贴"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TTrainTicket"
-            app:layout_constraintTop_toBottomOf="@+id/textView24"
+            app:layout_constraintStart_toEndOf="@+id/TOther3Name"
+            app:layout_constraintTop_toTopOf="@+id/TOther3"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/TOther3Name"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="104dp"
@@ -402,6 +407,7 @@
             android:background="@android:drawable/editbox_background"
             android:inputType="number"
             android:textColor="@android:color/black"
+            android:nextFocusDown="@id/TOther3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -411,17 +417,16 @@
 
         <EditText
             android:id="@+id/TOther1"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="2dp"
             android:background="@android:drawable/editbox_background"
-            android:editable="false"
-            android:enabled="false"
+            android:nextFocusDown="@id/TTrainTicket"
             android:inputType="number"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -437,10 +442,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="汽车票"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -448,8 +451,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TTrainTicket"
-            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="@+id/TOther2"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -458,9 +461,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="轮船票"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -474,35 +477,32 @@
 
         <EditText
             android:id="@+id/TOther2"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:background="@android:drawable/editbox_background"
             android:editable="false"
             android:inputType="number"
             android:textColor="@android:color/black"
+            android:nextFocusDown="@id/TOther3Name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView24"
+            app:layout_constraintStart_toStartOf="@+id/TOther1"
             app:layout_constraintTop_toBottomOf="@+id/TOther1"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/ETypeDate"
-            android:layout_width="wrap_content"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="64dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="市内交通费"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -510,8 +510,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17"
+            app:layout_constraintStart_toStartOf="@+id/TOther3Name"
+            app:layout_constraintTop_toTopOf="@+id/TTotal"
             app:layout_constraintVertical_bias="0.00999999" />
 
         <TextView
@@ -521,7 +521,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="住宿费"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -530,12 +530,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/TOther3Name"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/TTrainTicket"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="104dp"
@@ -545,6 +545,7 @@
             android:editable="false"
             android:inputType="number"
             android:textColor="@android:color/black"
+            android:nextFocusDown="@id/TOther2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -570,12 +571,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TPlaneTicket"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/TPlaneTicket"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="104dp"
@@ -583,9 +584,8 @@
             android:layout_marginRight="104dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
+            android:nextFocusDown="@id/TOther1"
             android:background="@android:drawable/editbox_background"
-            android:editable="false"
-            android:enabled="false"
             android:inputType="number"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -602,7 +602,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="火车票"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -611,7 +611,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView16"
-            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintTop_toTopOf="@+id/TTrainTicket"
             app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
@@ -620,14 +620,13 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="下一步"
+        android:background="@drawable/button_shape2"
         android:onClick="next"
+        android:text="下一步"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

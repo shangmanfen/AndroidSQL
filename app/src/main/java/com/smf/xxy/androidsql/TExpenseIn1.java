@@ -29,7 +29,7 @@ public class TExpenseIn1 extends Activity {
         setContentView(R.layout.activity_texpense_in);
         SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
         Name=pref.getString("account","");
-        WorkRecordNo=pref.getString("WWorkRecordNo","");
+        WorkRecordNo=pref.getString("RecordNo","");
         //WorkRecordNo="2018091401";
         findid();
         findb();
